@@ -1,458 +1,25 @@
-ï»¿/**
- * autoNumeric.js
- * @author: Bob Knothe
- * @author: Sokolov Yura
- * @version: 1.9.38 - 2015-07-12 GMT 7:00 PM / 19:00
- *
- * Created by Robert J. Knothe on 2010-10-25. Please report any bugs to https://github.com/BobKnothe/autoNumeric
- * Contributor by Sokolov Yura on 2010-11-07
- *
- * Copyright (c) 2011 Robert J. Knothe http://www.decorplanit.com/plugin/
- *
- * The MIT License (http://www.opensource.org/licenses/mit-license.php)
- *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
-(function ($) {
-    "use strict";
-    /*jslint browser: true*/
-    /*global jQuery: false*/
-    /*Cross browser routine for getting selected range/cursor position
-     */
-
-   /**
-     * Cross browser routine for getting selected range/cursor position
-     */
-    function getElementSelection(that) {
-        var position = {};
-        if (that.selectionStart === undefined) {
-            that.focus();
-            var select = document.selection.createRange();
-            position.length = select.text.length;
-            select.moveStart('character', -that.value.length);
-            position.end = select.text.length;
-            position.start = position.end - position.length;
-        } else {
-            position.start = that.selectionStart;
-            position.end = that.selectionEnd;
-            position.length = position.end - position.start;
-        }
-        return position;
-    }
-
-    /**
-     * Cross browser routine for setting selected range/cursor position
-     */
-    function setElementSelection(that, start, end) {
-        if (that.selectionStart === undefined) {
-            that.focus();
-            var r = that.createTextRange();
-            r.collapse(true);
-            r.moveEnd('character', end);
-            r.moveStart('character', start);
-            r.select();
-        } else {
-            that.selectionStart = start;
-            that.selectionEnd = end;
-        }
-    }
-
-    /**
-     * run callbacks in parameters if any
-     * any parameter could be a callback:
-     * - a function, which invoked with jQuery element, parameters and this parameter name and returns parameter value
-     * - a name of function, attached to $(selector).autoNumeric.functionName(){} - which was called previously
-     */
-    function runCallbacks($this, settings) {
-        /**
-         * loops through the settings object (option array) to find the following
-         * k = option name example k=aNum
-         * val = option value example val=0123456789
-         */
-        $.each(settings, function (k, val) {
-            if (typeof val === 'function') {
-                settings[k] = val($this, settings, k);
-            } else if (typeof $this.autoNumeric[val] === 'function') {
-                /**
-                 * calls the attached function from the html5 data example: data-a-sign="functionName"
-                 */
-                settings[k] = $this.autoNumeric[val]($this, settings, k);
-            }
-        });
-    }
-
-    /**
-     * Converts the vMin, vMax & mDec string to numeric value
-     */
-    function convertKeyToNumber(settings, key) {
-        if (typeof (settings[key]) === 'string') {
-            settings[key] *= 1;
-        }
-    }
-
-    /**
-     * Preparing user defined options for further usage
-     * merge them with defaults appropriately
-     */
-    function autoCode($this, settings) {
-        runCallbacks($this, settings);
-        settings.tagList = ['b', 'caption', 'cite', 'code', 'dd', 'del', 'div', 'dfn', 'dt', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ins', 'kdb', 'label', 'li', 'output', 'p', 'q', 's', 'sample', 'span', 'strong', 'td', 'th', 'u', 'var'];
-        var vmax = settings.vMax.toString().split('.'),
-            vmin = (!settings.vMin && settings.vMin !== 0) ? [] : settings.vMin.toString().split('.');
-        convertKeyToNumber(settings, 'vMax');
-        convertKeyToNumber(settings, 'vMin');
-        convertKeyToNumber(settings, 'mDec'); /** set mDec if not defined by user */
-        settings.mDec = (settings.mRound === 'CHF') ? '2' : settings.mDec;
-        settings.allowLeading = true;
-        settings.aNeg = settings.vMin < 0 ? '-' : '';
-        vmax[0] = vmax[0].replace('-', '');
-        vmin[0] = vmin[0].replace('-', '');
-        settings.mInt = Math.max(vmax[0].length, vmin[0].length, 1);
-        if (settings.mDec === null) {
-            var vmaxLength = 0,
-                vminLength = 0;
-            if (vmax[1]) {
-                vmaxLength = vmax[1].length;
-            }
-            if (vmin[1]) {
-                vminLength = vmin[1].length;
-            }
-            settings.mDec = Math.max(vmaxLength, vminLength);
-        } /** set alternative decimal separator key */
-        if (settings.altDec === null && settings.mDec > 0) {
-            if (settings.aDec === '.' && settings.aSep !== ',') {
-                settings.altDec = ',';
-            } else if (settings.aDec === ',' && settings.aSep !== '.') {
-                settings.altDec = '.';
-            }
-        }
-        /** cache regexps for autoStrip */
-        var aNegReg = settings.aNeg ? '([-\\' + settings.aNeg + ']?)' : '(-?)';
-        settings.aNegRegAutoStrip = aNegReg;
-        settings.skipFirstAutoStrip = new RegExp(aNegReg + '[^-' + (settings.aNeg ? '\\' + settings.aNeg : '') + '\\' + settings.aDec + '\\d]' + '.*?(\\d|\\' + settings.aDec + '\\d)');
-        settings.skipLastAutoStrip = new RegExp('(\\d\\' + settings.aDec + '?)[^\\' + settings.aDec + '\\d]\\D*$');
-        var allowed = '-' + settings.aNum + '\\' + settings.aDec;
-        settings.allowedAutoStrip = new RegExp('[^' + allowed + ']', 'gi');
-        settings.numRegAutoStrip = new RegExp(aNegReg + '(?:\\' + settings.aDec + '?(\\d+\\' + settings.aDec + '\\d+)|(\\d*(?:\\' + settings.aDec + '\\d*)?))');
-        return settings;
-    }
-
-    /**
-     * strips all unwanted characters and leave only a number alert
-     */
-    function autoStrip(s, settings, strip_zero) {
-        if (settings.aSign) { /** remove currency sign */
-            while (s.indexOf(settings.aSign) > -1) {
-                s = s.replace(settings.aSign, '');
-            }
-        }
-        s = s.replace(settings.skipFirstAutoStrip, '$1$2'); /** first replace anything before digits */
-        s = s.replace(settings.skipLastAutoStrip, '$1'); /** then replace anything after digits */
-        s = s.replace(settings.allowedAutoStrip, ''); /** then remove any uninterested characters */
-        if (settings.altDec) {
-            s = s.replace(settings.altDec, settings.aDec);
-        } /** get only number string */
-        var m = s.match(settings.numRegAutoStrip);
-        s = m ? [m[1], m[2], m[3]].join('') : '';
-        if ((settings.lZero === 'allow' || settings.lZero === 'keep') && strip_zero !== 'strip') {
-            var parts = [],
-                nSign = '';
-            parts = s.split(settings.aDec);
-            if (parts[0].indexOf('-') !== -1) {
-                nSign = '-';
-                parts[0] = parts[0].replace('-', '');
-            }
-            if (parts[0].length > settings.mInt && parts[0].charAt(0) === '0') { /** strip leading zero if need */
-                parts[0] = parts[0].slice(1);
-            }
-            s = nSign + parts.join(settings.aDec);
-        }
-        if ((strip_zero && settings.lZero === 'deny') || (strip_zero && settings.lZero === 'allow' && settings.allowLeading === false)) {
-            var strip_reg = '^' + settings.aNegRegAutoStrip + '0*(\\d' + (strip_zero === 'leading' ? ')' : '|$)');
-            strip_reg = new RegExp(strip_reg);
-            s = s.replace(strip_reg, '$1$2');
-        }
-        return s;
-    }
-
-    /**
-     * places or removes brackets on negative values
-     * works only when with pSign: 'p'
-     */
-    function negativeBracket(s, settings) {
-        if (settings.pSign === 'p') {
-            var brackets = settings.nBracket.split(',');
-            if (!settings.hasFocus && !settings.removeBrackets) {
-                s = s.replace(settings.aNeg, '');
-                s = brackets[0] + s + brackets[1];
-            } else if ((settings.hasFocus && s.charAt(0) === brackets[0]) || (settings.removeBrackets && s.charAt(0) === brackets[0])) {
-                s = s.replace(brackets[0], settings.aNeg);
-                s = s.replace(brackets[1], '');
-            }
-        }
-        return s;
-    }
-
-    /**
-     * function to handle numbers less than 0 that are stored in Exponential notation ex: .0000001 stored as 1e-7
-     */
-    function checkValue(value, settings) {
-        if (value) {
-            var checkSmall = +value;
-            if (checkSmall < 0.000001 && checkSmall > -1) {
-                value = +value;
-                if (value < 0.000001 && value > 0) {
-                    value = (value + 10).toString();
-                    value = value.substring(1);
-                }
-                if (value < 0 && value > -1) {
-                    value = (value - 10).toString();
-                    value = '-' + value.substring(2);
-                }
-                value = value.toString();
-            } else {
-                var parts = value.split('.');
-                if (parts[1] !== undefined) {
-                    if (+parts[1] === 0) {
-                        value = parts[0];
-                    } else {
-                        parts[1] = parts[1].replace(/0*$/, '');
-                        value = parts.join('.');
-                    }
-                }
-            }
-        }
-        return (settings.lZero === 'keep') ? value : value.replace(/^0*(\d)/, '$1');
-    }
-
-    /**
-     * prepare number string to be converted to real number
-     */
-    function fixNumber(s, aDec, aNeg) {
-        if (aDec && aDec !== '.') {
-            s = s.replace(aDec, '.');
-        }
-        if (aNeg && aNeg !== '-') {
-            s = s.replace(aNeg, '-');
-        }
-        if (!s.match(/\d/)) {
-            s += '0';
-        }
-        return s;
-    }
-
-    /**
-     * prepare real number to be converted to our format
-     */
-    function presentNumber(s, aDec, aNeg) {
-        if (aNeg && aNeg !== '-') {
-            s = s.replace('-', aNeg);
-        }
-        if (aDec && aDec !== '.') {
-            s = s.replace('.', aDec);
-        }
-        return s;
-    }
-
-    /**
-     * private function to check for empty value
-     */
-    function checkEmpty(iv, settings, signOnEmpty) {
-        if (iv === '' || iv === settings.aNeg) {
-            if (settings.wEmpty === 'zero') {
-                return iv + '0';
-            }
-            if (settings.wEmpty === 'sign' || signOnEmpty) {
-                return iv + settings.aSign;
-            }
-            return iv;
-        }
-        return null;
-    }
-
-    /**
-     * private function that formats our number
-     */
-    function autoGroup(iv, settings) {
-        iv = autoStrip(iv, settings);
-        var testNeg = iv.replace(',', '.'),
-            empty = checkEmpty(iv, settings, true);
-        if (empty !== null) {
-            return empty;
-        }
-        var digitalGroup = '';
-        if (settings.dGroup === 2) {
-            digitalGroup = /(\d)((\d)(\d{2}?)+)$/;
-        } else if (settings.dGroup === 4) {
-            digitalGroup = /(\d)((\d{4}?)+)$/;
-        } else {
-            digitalGroup = /(\d)((\d{3}?)+)$/;
-        } /** splits the string at the decimal string */
-        var ivSplit = iv.split(settings.aDec);
-        if (settings.altDec && ivSplit.length === 1) {
-            ivSplit = iv.split(settings.altDec);
-        } /** assigns the whole number to the a variable (s) */
-        var s = ivSplit[0];
-        if (settings.aSep) {
-            while (digitalGroup.test(s)) { /** re-inserts the thousand separator via a regular expression */
-                s = s.replace(digitalGroup, '$1' + settings.aSep + '$2');
-            }
-        }
-        if (settings.mDec !== 0 && ivSplit.length > 1) {
-            if (ivSplit[1].length > settings.mDec) {
-                ivSplit[1] = ivSplit[1].substring(0, settings.mDec);
-            } /** joins the whole number with the decimal value */
-            iv = s + settings.aDec + ivSplit[1];
-        } else { /** if whole numbers only */
-            iv = s;
-        }
-        if (settings.aSign) {
-            var has_aNeg = iv.indexOf(settings.aNeg) !== -1;
-            iv = iv.replace(settings.aNeg, '');
-            iv = settings.pSign === 'p' ? settings.aSign + iv : iv + settings.aSign;
-            if (has_aNeg) {
-                iv = settings.aNeg + iv;
-            }
-        }
-        if (testNeg < 0 && settings.nBracket !== null) { /** removes the negative sign and places brackets */
-            iv = negativeBracket(iv, settings);
-        }
-        return iv;
-    }
-
-    /**
-     * round number after setting by pasting or $().autoNumericSet()
-     * private function for round the number
-     * please note this handled as text - JavaScript math function can return inaccurate values
-     * also this offers multiple rounding methods that are not easily accomplished in JavaScript
-     */
-    function autoRound(iv, settings) { /** value to string */
-        iv = (iv === '') ? '0' : iv.toString();
-        convertKeyToNumber(settings, 'mDec'); /** set mDec to number needed when mDec set by 'update method */
-        if (settings.mRound === 'CHF') {
-            iv = (Math.round(iv * 20) / 20).toString();
-        }
-        var ivRounded = '',
-            i = 0,
-            nSign = '',
-            rDec = (typeof (settings.aPad) === 'boolean' || settings.aPad === null) ? (settings.aPad ? settings.mDec : 0) : +settings.aPad;
-        var truncateZeros = function (ivRounded) { /** truncate not needed zeros */
-            var regex = (rDec === 0) ? (/(\.(?:\d*[1-9])?)0*$/) : rDec === 1 ? (/(\.\d(?:\d*[1-9])?)0*$/) : new RegExp('(\\.\\d{' + rDec + '}(?:\\d*[1-9])?)0*$');
-            ivRounded = ivRounded.replace(regex, '$1'); /** If there are no decimal places, we don't need a decimal point at the end */
-            if (rDec === 0) {
-                ivRounded = ivRounded.replace(/\.$/, '');
-            }
-            return ivRounded;
-        };
-        if (iv.charAt(0) === '-') { /** Checks if the iv (input Value)is a negative value */
-            nSign = '-';
-            iv = iv.replace('-', ''); /** removes the negative sign will be added back later if required */
-        }
-        if (!iv.match(/^\d/)) { /** append a zero if first character is not a digit (then it is likely to be a dot)*/
-            iv = '0' + iv;
-        }
-        if (nSign === '-' && +iv === 0) { /** determines if the value is zero - if zero no negative sign */
-            nSign = '';
-        }
-        if ((+iv > 0 && settings.lZero !== 'keep') || (iv.length > 0 && settings.lZero === 'allow')) { /** trims leading zero's if needed */
-            iv = iv.replace(/^0*(\d)/, '$1');
-        }
-        var dPos = iv.lastIndexOf('.'),
-            /** virtual decimal position */
-            vdPos = (dPos === -1) ? iv.length - 1 : dPos,
-            /** checks decimal places to determine if rounding is required */
-            cDec = (iv.length - 1) - vdPos; /** check if no rounding is required */
-        if (cDec <= settings.mDec) {
-            ivRounded = iv; /** check if we need to pad with zeros */
-            if (cDec < rDec) {
-                if (dPos === -1) {
-                    ivRounded += '.';
-                }
-                var zeros = '000000';
-                while (cDec < rDec) {
-                    zeros = zeros.substring(0, rDec - cDec);
-                    ivRounded += zeros;
-                    cDec += zeros.length;
-                }
-            } else if (cDec > rDec) {
-                ivRounded = truncateZeros(ivRounded);
-            } else if (cDec === 0 && rDec === 0) {
-                ivRounded = ivRounded.replace(/\.$/, '');
-            }
-            if (settings.mRound !== 'CHF') {
-                return (+ivRounded === 0) ? ivRounded : nSign + ivRounded;
-            }
-            if (settings.mRound === 'CHF') {
-                dPos = ivRounded.lastIndexOf('.');
-                iv = ivRounded;
-            }
-
-        } /** rounded length of the string after rounding */
-        var rLength = dPos + settings.mDec,
-            tRound = +iv.charAt(rLength + 1),
-            ivArray = iv.substring(0, rLength + 1).split(''),
-            odd = (iv.charAt(rLength) === '.') ? (iv.charAt(rLength - 1) % 2) : (iv.charAt(rLength) % 2),
-            onePass = true;
-        if (odd !== 1) {
-            odd = (odd === 0 && (iv.substring(rLength + 2, iv.length) > 0)) ? 1 : 0;
-        }
-        /*jslint white: true*/
-        if ((tRound > 4 && settings.mRound === 'S') || /**                      Round half up symmetric */
-            (tRound > 4 && settings.mRound === 'A' && nSign === '') || /**      Round half up asymmetric positive values */
-            (tRound > 5 && settings.mRound === 'A' && nSign === '-') || /**     Round half up asymmetric negative values */
-            (tRound > 5 && settings.mRound === 's') || /**                      Round half down symmetric */
-            (tRound > 5 && settings.mRound === 'a' && nSign === '') || /**      Round half down asymmetric positive values */
-            (tRound > 4 && settings.mRound === 'a' && nSign === '-') || /**     Round half down asymmetric negative values */
-            (tRound > 5 && settings.mRound === 'B') || /**                      Round half even "Banker's Rounding" */
-            (tRound === 5 && settings.mRound === 'B' && odd === 1) || /**       Round half even "Banker's Rounding" */
-            (tRound > 0 && settings.mRound === 'C' && nSign === '') || /**      Round to ceiling toward positive infinite */
-            (tRound > 0 && settings.mRound === 'F' && nSign === '-') || /**     Round to floor toward negative infinite */
-            (tRound > 0 && settings.mRound === 'U') || /**                      round up away from zero */
-            (settings.mRound === 'CHF')) { /**                                  Round Swiss FRanc */
-            /*jslint white: false*/
-            for (i = (ivArray.length - 1); i >= 0; i -= 1) { /** Round up the last digit if required, and continue until no more 9's are found */
-                if (ivArray[i] !== '.') {
-                    if (settings.mRound === 'CHF' && ivArray[i] <= 2 && onePass) {
-                        ivArray[i] = 0;
-                        onePass = false;
-                        break;
-                    }
-                    if (settings.mRound === 'CHF' && ivArray[i] <= 7 && onePass) {
-                        ivArray[i] = 5;
-                        onePass = false;
-                        break;
-                    }
-                    if (settings.mRound === 'CHF' && onePass) {
-                        ivArray[i] = 10;
-                        onePass = false;
-                    } else {
-                        ivArray[i] = +ivArray[i] + 1;
-                    }
-                    if (ivArray[i] < 10) {
-                        break;
-                    }
-                    if (i > 0) {
-                        ivArray[i] = '0';
-                    }
+ÇçÈç™âÉçÊçËçÌçìììììì ì!ì"ì#ì$ì%ì&ì'ì(ì)ì¶ï·ï¸ï´ò¹ï*ìµò¶òøôùôúôûôüô°ö±ö²öí÷î÷ÓøÔøæù]úŠú¥Ÿ&ª¹¯º¯»¯ÆÆ¦Ÿ£¡¤¡!¥"¥#¥$¥'ª¼¯½¯¾¯¿¯ò½6¶7¶8¶9¶ó½ô½õ½ö½ÆÆÆÆÆÁÍÂÍÃÍÜÜÜÜÜ›âœââÏçĞçÑçÒç+ì,ì-ìºï·ò¸òşô´ö§Ÿ(ª;¶<¶÷½ÆÆÆÍ)Õ*Õ+Õ,ÕÜâÓç/ì¹ò¨Ÿ%¥&¥)ªÀ¯Á¯Â¯Ã¯Ä¯Å¯>¶?¶@¶A¶B¶C¶D¶E¶F¶ø½ù½ú½û½ü½ı½ş½ÆÆÿ½ÆÇÍÈÍÉÍ-Õ.Õ/Õ0ÕÜŸâ â¡âÔçÕçÖç1ì2ì»ò©Ÿ'¥*ª+ª,ª-ª.ª/ªÆ¯Ç¯È¯É¯Ê¯Ë¯Ì¯Í¯Î¯Ï¯Ğ¯Ñ¯Ò¯Ó¯Ô¯Õ¯Ö¯×¯Ø¯Ù¯Ú¯Û¯Ü¯İ¯I¶J¶K¶L¶M¶N¶O¶P¶Q¶R¶S¶T¶U¶V¶W¶X¶Y¶Z¶[¶\¶]¶^¶_¶¾¾`¶a¶b¶c¶d¶e¶¾¾¾	¾
+¾¾¾¾¾¾¾¾¾¾¾¾¾¾f¶¾¾ÆÆÆÆÆÆÆ Æ!Æ"Æ#Æ$Æ%Æ&Æ'Æ(ÆËÍÌÍÍÍÎÍÏÍĞÍÑÍÒÍÓÍÔÍÕÍÖÍ×ÍØÍÙÍëÍÚÍÛÍÜÍİÍŞÍßÍàÍáÍâÍãÍäÍåÍ1Õ2Õ3Õ4Õ5Õ6Õ7Õ8Õ9Õ:Õ;ÕìÍ<Õ=Õ>Õ?Õ@ÕAÕBÕCÕDÕEÕFÕGÕHÕÜÜÜÜ Ü!Ü"Ü#Ü$Ü%Ü&Ü'Ü(Ü£â¤â¥â¦â§â¨â©âªâ«â¬â­â®â¯â°â±â²âØç·âÙçÚçÛçÜçİçŞçßçàçáçâçãçäçåçæçççèçéçêç3ì4ì5ì6ì7ì8ì9ì:ì;ì<ì=ì¼ï½ï¾ï¿ïÀïÁïÂïÃï¼ò½ò¾ò¿òÀòõõõõï÷ÖøØø×ø}ù~ùçùªŸà¯i¶+Æ,ÆíÍù«Ÿ(¥0ª1ªá¯â¯ã¯j¶¾¾-Æ.ÆîÍîçïçÇïÁò¬Ÿ)¥*¥+¥2ª3ª4ª5ª6ª7ª8ª9ª:ª;ª<ªå¯æ¯ç¯è¯é¯ê¯ë¯ì¯í¯î¯ï¯ğ¯ñ¯ò¯ó¯ô¯õ¯ö¯÷¯ø¯ù¯ú¯û¯ü¯ı¯ş¯ÿ¯k¶l¶m¶n¶o¶p¶q¶r¶s¶¾t¶u¶v¶w¶x¶y¶z¶{¶|¶}¶~¶¶€¶¶‚¶ƒ¶„¶…¶†¶‡¶ˆ¶‰¶Š¶‹¶Œ¶¶¶¾ ¾!¾"¾#¾$¾%¾&¾'¾(¾)¾*¾+¾,¾-¾.¾/¾0¾1¾2¾3¾4¾5¾6¾7¾8¾/Æ0Æ1Æ2Æ3Æ4Æ5Æ6Æ7Æ8Æ9Æ:Æ;Æ<Æ=Æ>Æ?Æ@ÆAÆBÆCÆDÆEÆFÆGÆHÆIÆJÆïÍğÍñÍòÍóÍôÍLÕõÍöÍ÷ÍøÍùÍúÍûÍüÍıÍşÍÿÍÎÎÎÎÎÎÎ	Î
+ÎÎÎÎÎÎÎÎÎÎÎMÕNÕOÕPÕQÕRÕSÕTÕUÕVÕWÕXÕYÕZÕ[Õ\Õ]Õ^Õ_ÕÎ`ÕaÕbÕcÕdÕeÕfÕgÕhÕ+Ü,Ü-Ü.Ü/Ü0Ü1ÜiÕ2Ü3Ü4Ü5Ü6Ü7Ü8Ü9Ü:Ü;Ü<Ü=Ü>Ü?Ü@ÜAÜBÜCÜDÜEÜ¸âFÜGÜHÜºâ»â¹â¼â½â¾â¿âÀâÁâÂâIÜÃâÄâÅâÆâÇâÈâÉâÊâËâÌâğçñçòçóçôçõçöç÷çøçùçúçûçüçıçşçÿçèèèèèèè?ì@ìAìBìCìDìEìFìGìHìIìJìKìLìMìNìOìÈïÉïÊïËïÌïÍïÎïÏïĞïÑïÒïÂòÃòÄòÅòÆòÇòÈòÉòÊòËòÌòõõõ	õ
+õõõõµöğ÷ñ÷Ùø€ù­Ÿh¦¡-¥>ª?ª@ªAªBªCª°°°°	°
+°°°°°°“¶”¶•¶–¶—¶˜¶™¶š¶›¶œ¶¶¶Ÿ¶ ¶¡¶¢¶£¶¤¶:¾¥¶;¾<¾=¾LÆ>¾?¾@¾A¾B¾C¾D¾E¾F¾MÆNÆOÆPÆQÆRÆSÆTÆUÆÎÎÎÎÎÎÎÎ Î!Î"ÎVÆ#Î$ÎkÕlÕmÕnÕoÕpÕqÕrÕsÕtÕuÕvÕwÕxÕyÕzÕ{Õ|Õ}ÕMÜNÜOÜPÜQÜRÜSÜTÜUÜVÜÕâÖâ×âèèØâèèPìQìRìSìÔïÕïÍò¸ö¹öò÷ÛøÜø¯Ÿ°°J¾YÆ&Î°Ÿ.¥/¥0¥1¥2¥DªEªFªGªHªIªJª°°°°°°°°°°° °!°ª¶«¶¬¶­¶®¶¯¶°¶±¶²¶³¶´¶µ¶¶¶·¶¸¶¹¶º¶»¶¼¶½¶¾¶¿¶À¶Á¶Â¶K¾L¾M¾N¾O¾P¾Q¾R¾S¾T¾U¾V¾W¾X¾ZÆ[Æ\Æ]Æ^Æ_Æ`ÆY¾aÆbÆcÆdÆeÆfÆgÆhÆ(Î)Î*Î+Î,Î-Î.Î/Î0Î1Î2Î3Î4Î5Î6Î7Î8Î9Î:Î;Î<Î=Î>Î~ÕÕ€ÕÕ‚ÕƒÕ„Õ…Õ†Õ‡ÕˆÕ‰ÕŠÕ‹ÕXÜÕYÜZÜ[Ü\Ü]Ü^Ü_Ü`ÜaÜbÜcÜdÜeÜfÜÚâÛâÜâİâŞâèŒÕßâàâáâââãâäâåâæâêâèèèèèèèèèèèUìVìWìXìYì×ïØïÙïÚïÛïÜïİïŞïÎòÏòĞòÑòºö»öŞøİø±Ÿ§¡4¥5¥KªLªMªNª%°&°'°(°)°*°+°,°Ã¶Ä¶Å¶Æ¶Ç¶È¶É¶Ê¶Ë¶Ì¶Í¶^¾_¾`¾a¾b¾c¾d¾jÆkÆlÆmÆe¾nÆoÆpÆBÎCÎDÎEÎFÎGÎHÎIÎJÎKÎÕÕ‘Õ’Õ“Õ”ÕkÜlÜmÜnÜoÜpÜqÜëâìâíâîâïâğâñâòâóâè è!è"è#èõ\ì]ìáïÒòõõ¼ö²Ÿ6¥7¥PªQª/°0°1°2°3°4°5°6°Ï¶Ğ¶Ñ¶Ò¶Ó¶Ô¶Õ¶@ÁAÁf¾qÆrÆsÆtÆuÆvÆMÎNÎOÎPÎ–Õ—Õ›Õ˜Õ™Õõâ%è&è'è^ìÓòÔò½ö¨¡SªTª7°8°9°:°;°<°=°>°ê¶×¶Ø¶Ù¶Ú¶Û¶Ü¶İ¶Ş¶ß¶à¶á¶â¶ã¶ä¶å¶æ¶ç¶g¾h¾i¾j¾k¾l¾m¾n¾o¾p¾q¾r¾s¾t¾u¾v¾w¾x¾y¾z¾{¾|¾}¾~¾¾€¾¾‚¾ƒ¾„¾…¾†¾‡¾ˆ¾‰¾Š¾‹¾Œ¾¾¾¾wÆxÆyÆzÆ{Æ|Æ}Æ~ÆÆ€ÆÆ‚ÆƒÆ„Æ…Æ†Æ‡ÆˆÆ‰ÆŠÆ‹ÆŒÆÆÆÆÆ‘Æ’Æ“Æ”Æ•ÆSÎTÎUÎVÎWÎXÎYÎZÎ[Î\Î]Î^Î_Î`Î™ÆaÎbÎcÎdÎeÎfÎgÎhÎœÕiÎjÎkÎlÎmÎnÎoÎpÎqÎrÎsÎÕÕŸÕ Õ¡Õ¢Õ£Õ¤Õ¥Õ¦Õ§Õ¨Õ©ÕªÕ«Õ¬Õ­Õ®Õ¯Õ°Õ±Õ²Õ³Õ´ÕµÕ¶Õ·Õ¸Õ¹ÕºÕ»Õ¼Õ½Õ¾Õ¿ÕÀÕÁÕÂÕÃÕÄÕÅÕÆÕÇÕrÜsÜtÜuÜvÜwÜxÜyÜzÜ{Ü|Ü}ÜØÕ~ÜÜ€ÜÜ‚ÜƒÜ„ÜtÎ…Ü†Ü‡ÜˆÜ‰ÜŠÜ‹ÜŒÜ÷âÜÜÜÜ‘Ü’Ü“Ü”Ü•Ü–Üøâùâúâûâüâıâşâÿâããããããã	ã
+ãããããããããããã*è+è,è-è.è/è0è1è2è!ã3è4è5è6è7è8è9è:è;è<è=è>è?è@èAèBèCèDèEèFèGèHèIèãJèKèLè)èMèNèYè_ì`ìaìbìcìdìeìfìgìhìiìjìkìlìmìnìoìpìqìâïrìsìtìuìvìwìãïäïåïæïçïèïéïêïëïìïíïîïïïğïñïòïÕòÖò×òØòÙòÚòÛòÜòİòŞòßòàòáòõõõõõâòõ¾ö¿öÀöÁöÂöÃöÄöó÷ÅöÆöÇöô÷õ÷ö÷÷÷ø÷ù÷ú÷ùßø‚ùƒù„ù…ùèùéùŒú ú©¡UªVªWªA°B°C°D°E°F°G°H°I°J°K°L°ë¶ì¶í¶î¶ï¶ğ¶ñ¶ò¶ó¶ô¶õ¶ö¶÷¶ø¶ù¶‘¾’¾“¾”¾•¾–¾—¾˜¾™¾š¾›¾œ¾šÆ›ÆœÆÆÆ¾ŸÆ Æ¡Æ¢Æ£Æ¤Æ¥Æ¦Æ§Æ¨ÆÎ€ÎÎ‚ÎƒÎ„Î…Î†ÎÙÕÚÕÛÕÜÕİÕŞÕßÕàÕáÕâÕ‡ÎãÕªÜ«Ü¬Ü­Ü®Ü¯Ü°Ü±Ü²Ü³Ü´ÜµÜ¶Ü"ã#ã$ã%ã&ã'ã(ã)ã*ã+ãZè[è\è]è^è_è`èaèbècè}ì~ìì€ììdè÷ïøïùïúïûïãòäòåòÉöõëùÊöü÷†ù"úª¡«¡8¥9¥XªYªZª[ªN°O°P°Q°R°S°T°U°V°W°ú¶û¶ü¶ı¶ş¶ÿ¶·······	·
+················Ÿ¾ ¾ªÆ«Æ¡¾¢¾£¾¤¾¥¾¦¾§¾¨¾©¾ª¾«¾¬¾­¾®¾¯¾°¾±¾²¾³¾´¾µ¾¶¾·¾¸¾¹¾º¾»¾¼¾½¾¾¾¿¾À¾Á¾¬Æ­Æ®Æ¯Æ°Æ±Æ²Æ³Æ´ÆµÆ¶Æ·Æ¸Æ¹ÆŒÎºÆ»Æ¼Æ½Æ¾Æ¿ÆÀÆÁÆÂÆÃÆÄÆÅÆÆÆÇÆÈÆÉÆÊÆËÆÌÆÍÆÎÆÏÆĞÆÑÆÒÆÓÆÔÆÕÆÎÎÎÎ‘Î’ÎÖÆ“Î”Î•Î–Î—Î˜Î™ÎšÎ›ÎœÎÎÎŸÎ Î¡Î¢Î£Î¤Î¥Î¦Î§Î¨Î©ÎæÕªÎ«Î¬Î­Î®ÎèÕéÕêÕëÕìÕíÕîÕïÕğÕñÕòÕóÕôÕõÕöÕ÷ÕøÕùÕúÕûÕüÕıÕşÕÿÕÖÖÖÖÖÖÖ	Ö
+ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖçÕÖÖºÜ Ö!Ö»Ü¼Ü½Ü¾Ü¿ÜÀÜÁÜÂÜÃÜÄÜÅÜÆÜÇÜÈÜÉÜÊÜËÜÌÜÍÜÎÜÏÜĞÜÑÜÒÜÓÜÔÜÕÜÖÜ×ÜØÜÙÜÚÜÛÜÜÜİÜŞÜßÜàÜáÜâÜãÜäÜåÜæÜçÜèÜéÜêÜëÜìÜ-ã.ã/ã0ã1ã2ã3ã4ã5ã6ã7ã8ã9ã:ã;ã<ã=ã>ã?ã@ãAãBãCãDãEãFãGãHãIãJãKãLãMãfègèhèièjèkèlèmènèoèpèqèrèsètèuèvèwèxèyèzè{è|è}è~èè€èè‚èƒè„è‹è…è†èıï‡èˆè„ì…ì†ì‡ìˆì‰ìŠì‹ìŒììììì‘ì’ì“ì”ì•ì–ì—ì˜ì™ìšì›ìşïœìÿïğğğğğğğ	ğì
+ğğğğğğğğğçòèòéòêòëòìòíòîòïòõõ õ!õ"õ#õ$õ%õ&õ'õ(õ)õ*õËöÌöı÷ş÷ÿ÷øáø‡ùˆù‰ùŠù#ú$ú{ú–³Ÿ¬¡­¡®¡¯¡°¡±¡²¡³¡´¡µ¡¶¡;¥<¥=¥>¥?¥@¥A¥B¥C¥D¥:¥E¥F¥G¥H¥I¥J¥K¥L¥]ª^ª_ª`ªaªbªcªdªeªfªgªhªiªjªkªlªmªnª[°\°]°^°_°`°a°b°c°d°e°f°g°h°i°····· ·!·"·#·Ä¾Å¾Æ¾Ç¾È¾É¾Ê¾Ë¾Ì¾Í¾Î¾Ï¾Ğ¾Ñ¾Ò¾Ó¾Ô¾Õ¾Ö¾×¾Ø¾Ù¾Ú¾Û¾Ü¾ØÆÙÆÚÆÛÆÜÆİÆŞÆßÆàÆáÆâÆãÆäÆåÆæÆçÆèÆéÆêÆëÆìÆíÆîÆ±Î²Î³Î´ÎµÎ¶Î·Î¸Î¹ÎºÎ»Î¼Î)Ö*Ö+Ö,Ö-Ö.Ö/ÖøÜùÜúÜûÜOãPãQãRãSãğ·¡oªj°$·%·İ¾&·Ş¾ïÆğÆñÆ0Ö1ÖTãŒèèè£ì¤ì¥ìğğôò+õÏöĞöâø¸¡´ŸjpªM¥qªrªl°sªm°(·)·*·+·,·-·.·/·á¾òÆóÆôÆ½Î¾Î¿ÎÀÎÁÎÂÎÃÎÄÎ2Ö3Ö4ÖÅÎ5Ö6ÖüÜıÜşÜÿÜUãVãWãXãèè‘è§ì’è¨ìğğğğÒöãøäø¹¡tªuªn°o°p°0·q°1·2·3·â¾4·5·6·7·ã¾ä¾å¾æ¾ç¾è¾õÆöÆ÷ÆÇÎÈÎÉÎÊÎËÎÌÎÍÎÎÎ7ÖİİİİİYãZã©ìªì«ìğğğğöò,õ-õ½¡s°t°8·9·:·;·<·=·>·é¾ê¾ë¾ì¾í¾î¾ï¾ğ¾ñ¾ò¾ó¾ô¾úÆûÆüÆıÆşÆÿÆÇÇÏÎĞÎÑÎ8Ö9Ö:Ö;Ö<Ö=Ö>Ö@Öİİ	İ
+İİİİİ[ã\ã]ã^ã”è•è–è—è˜è¬ì­ì®ì¯ì°ì™èğ ğ÷òøò¾¡k¿¡C·vªD·w°õ¾ö¾E·ÇÀ¡x°y°z°{°|°Á¡wª}°F·G·H·I·J·÷¾ø¾ù¾ú¾û¾ü¾ÇÒÎÓÎAÖBÖCÖİİ_ã`ãaãèè´ìµìùò/õÓöÔöÂ¡N¥xª~°°K·L·M·N·O·P·Q·R·S·T·U·ı¾ş¾ÿ¾¿¿¿¿¿¿¿	¿ÇÇÇ	Ç
+ÇÇÇÔÎÕÎÖÎ×ÎDÖEÖFÖGÖHÖIÖJÖÇKÖLÖMÖİİİİİİİİcãdãgãŸè è¡è¢è£è¤è¶ì·ì¸ì!ğúòûòüòıòÕöÖöÃ¡lV·W·yªØÎÙÎÚÎPÖQÖÄ¡¸ŸÅ¡Æ¡Ç¡È¡zªO¥P¥Q¥R¥S¥T¥U¥V¥W¥X¥Y¥Z¥[¥\¥]¥^¥_¥{ª|ª}ª~ªª€ªª‚ªƒª„ª…ª†ª‡ªˆª‰ªŠª‹ªŒªªªªª‘ª’ª“ª”ª•ª–ª—ª˜ª™ªšª›ª°‚°ƒ°„°…°†°‡°ˆ°‰°Š°‹°Œ°°°°°‘°’°Ç“°”°•°–°—°˜°™°š°›°œ°°°Ÿ° °¡°¢°£°¤°¥°¦°§°¨°©°
+¿X·Y·Z·[·\·]·^·_·`·a·b·c·d·e·f·g·h·Çi·j·k·l·m·n·o·p·q·r·ª°s·t·u·v·w·x·y·z·{·|·Ç¿¿¿¿¿¿¿¿¿¿¿Ç¿¿¿¿¿¿¿¿¿¿ ¿!¿"¿#¿$¿%¿&¿'¿(¿)¿*¿+¿,¿-¿ÇÇÇÇÇÇÇÇÇÇÇÇÇ Ç!Ç"Ç#Ç$Ç%Ç&Ç'Ç(Ç)ÇRÖ*Ç+Ç,Ç-Ç.Ç/Ç0Ç1Ç2Ç3ÇİÎŞÎßÎàÎáÎâÎãÎäÎåÎæÎçÎèÎéÎêÎëÎìÎíÎîÎïÎğÎñÎòÎóÎôÎõÎ:ÇöÎ÷ÎøÎùÎúÎûÎüÎıÎşÎÿÎSÖTÖUÖVÖWÖXÖYÖZÖ[Ö\Ö]Ö^Ö_Ö`ÖaÖbÖcÖhãdÖİİİİ İ!İ"İ#İ$İ%İ&İ'İ(İ)İ*İ+İ,İ-İ¶Ú¦èjãkãlãmãnãoãpãqãrãsãtãuãvãwãxãyãzã~ã§èã¨è©èªè«è¬è­è®è¯è°è±è²è³è´èµè¶è·è¸è"ğ¹è¹ìºì»ì¼ì½ì¾ì¿ì#ğ$ğşò%ğ&ğÿòóóó0õ×öØö‹ùŒùøÉ¡ªª;ÇlÖ¼è½èÊ¡`¥·‚·<Ç=Ç>Ç1İ€ãË¡¬°@ÇAÇBÇCÇDÇmÖãÌ¡Ÿª ª­°„·…·4¿EÇFÇÏƒãnÖ‚ã„ãÄì+ğÎ¡¡ª¢ª£ª†·5¿GÇoÖpÖqÖ2İ3İ…ãÅì,ğÏ¡HÇÏrÖĞ¡¤ª®°¯°°°±°‡·ˆ·‰·Š·‹·Œ·····‘·’·“·6¿7¿8¿9¿:¿;¿<¿=¿>¿?¿IÇJÇKÇLÇÏÏÏÏ	Ï
+ÏÏÏÏÏsÖtÖuÖvÖ4İ5İ6İ7İ8İ9İ:İ†ã‡ãˆã‰ãŠã¿èÀèÁèÂèÆìÇìÈì-ğ.ğ/ğ0ğ1ğóóó	ó1õÚöøåøÑ¡a¥¥ªÃèÒ¡•·B¿NÇ2ğæøÓ¡˜¹ŸÕ¡Ö¡×¡Ø¡Ù¡Ú¡Û¡Ü¡b¥c¥d¥e¥f¥g¥h¥i¥j¥k¥l¥m¥n¥o¥p¥q¥r¥²°s¥t¥u¥¦ª§ª¨ª©ªªª«ª¬ª­ª®ª¯ª°ª±ª²ª³ª´ªµª¶ª·ª¸ª¹ªºª»ª¼ª½ª¾ª¿ªÀªÁªÂªÃªÄªÅªÆªÇªÈª–·ÉªÊªËªáªÌªÍªÎªÏªĞªÑªÒªÓªÔªÕªÖª×ªØªÙªÚªÛª³°´°µ°¶°·°¸°¹°º°»°¼°½°¾°¿°À°Á°Â°Ã°Ä°Å°Æ°Ç°È°É°Ê°Ë°Ì°Í°Î°Ï°Ğ°Ñ°Ò°Ó°Ô°Õ°Ö°×°Ø°Ù°Ú°Û°Ü°İ°Ş°ß°à°á°â°ã°ä°å°æ°ç°è°é°ê°š·ë°ì°í°î°ï°ğ°ñ°ò°ó°OÇô°õ°ö°›·œ···Ÿ· ·¡·E¿¢·£·¤·¥·¦·F¿§·¨·©·ª·«·¬·­·®·¯·°·±·²·³·´·µ·¶···¸·¹·º·»·¼·ü°PÇ½·¾·Üª¿·À·Á·Â·Ã·Ä·Å·QÇÆ·Ç·È·É·Ê·Ë·Ì·Í·Î·Ï·Ğ·Ñ·ò·Ò·Ó·Ô·Õ·Ö·C¿×·Ø·Ù·Ú·Û·Ü·İ·Ş·ß·à·á·â·ã·ä·å·æ·ç·D¿è·é·ê·ë·G¿H¿I¿J¿K¿L¿M¿N¿O¿P¿Q¿R¿S¿T¿U¿V¿W¿X¿Y¿Z¿[¿\¿]¿^¿_¿`¿a¿b¿c¿d¿e¿f¿g¿h¿i¿j¿k¿l¿m¿n¿o¿p¿VÇq¿r¿s¿t¿u¿v¿w¿x¿y¿z¿{¿|¿}¿~¿¿€¿¿‚¿–¿ƒ¿„¿…¿†¿‡¿ˆ¿‰¿Š¿‹¿Œ¿¿¿¿Ï¿‘¿WÇXÇYÇZÇ[Ç\Ç]Ç^Ç_Ç`ÇaÇbÇcÇdÇeÇfÇgÇhÇiÇjÇkÇlÇmÇnÇoÇpÇqÇÏrÇsÇtÇuÇvÇwÇxÇyÇzÇ{Ç|Ç}Ç~ÇÇ€ÇÇ‚ÇƒÇ„Ç…Ç†Ç‡ÇˆÇ‰ÇŠÇ‹ÇŒÇÇÇÇÇ‘Ç’Ç“Ç”Ç•Ç–Ç—Ç˜Ç™ÇšÇ›ÇœÇÇÇŸÇ Ç¡Ç¢Ç£Ç¤Ç¥Ç¦Ç§Ç¨Ç©ÇªÇ«Ç¬Ç­Ç®Ç¯Ç°Ç±Ç²Ç³Ç´ÇµÇ¶Ç·Ç¸Ç¹ÇºÇ»Ç¼ÇÏ½Ç¾ÇÏÏÏÏ'ÎÏÏÏÏÏÏ Ï!Ï"Ï#Ï$ÏÍÇ%Ï&Ï'Ï(Ï)Ï*Ï+Ï,Ï-Ï.Ï/Ï0Ï1Ï2Ï3Ï4Ï5Ï6Ï7Ï8Ï9Ï:Ï;Ï<Ï=Ï>Ï?Ï@ÏAÏBÏ¿ÇCÏDÏEÏFÏGÏHÏIÏJÏKÏLÏMÏNÏOÏPÏQÏRÏSÏTÏUÏVÏWÏXÏYÏZÏ[Ï\Ï]Ï^Ï_Ï`ÏaÏbÏcÏdÏeÏfÏgÏhÏiÏjÏkÏlÏmÏnÏoÏpÏqÏrÏsÏtÏ<İuÏvÏwÏxÏyÏ‚ÖƒÖ„Ö…Ö†Ö‡ÖˆÖ‰ÖŠÖ‹ÖŒÖÖÖÖÖ‘Ö’Ö“Ö”Ö•Ö–Ö—Ö˜Ö™ÖšÖ›ÖœÖÖÖŸÖ Ö¡Ö¢Ö£Ö¤Ö¥Ö¦Ö§Ö¨Ö©ÖÉÔªÖ«Ö¬Ö­Ö®Ö¯Ö°Ö±Ö²Ö³Ö´ÖµÖ†Ï¶Ö·Ö‡Ï¸Ö¹ÖºÖ»Ö¼Ö½Ö¾Ö¿ÖÀÖÁÖÂÖÃÖÄÖÅÖÆÖÇÖÈÖÉÖÊÖËÖÌÖ‹ãÍÖ>İÎÖÏÖĞÖÑÖáÖÒÖ?İ@İAİBİCİDİEİFİGİHİˆÏIİJİKİLİMİNİOİPİQİRİSİTİUİVİWİXİYİZİ[İ\İ]İ‰Ï^İ_İ`İaİbİcİdİeİfİgİhİiİjİkİlİmİnİoİpİqİrİsİtİuİvİwİxİyİzİ{İ|İ}İ~İİ€İİ‚İƒİ„İ…İ†İ‡İˆİ‰İŠİ‹İŒİİİİİ‘İ’İŸİ‘ã’ã“ã”ã•ã–ã—ã˜ã™ãšã›ãœãããŸã ã¡ã İ¢ã£ã¤ã¥ã¦ã§ã¨ãÊè©ãªã«ã¬ã­ã®ã¯ã°ã±ã²ã³ã´ãµã¶ã·ã¸ã¹ãºã»ã¼ã½ã¾ã¿ãÀãÁãÂãÃãÄãÅãÆãËèÌèÍèÎèÏèĞèÑèÒèÓèÔèÕèÖè×èØèÙèÚèÛèÜèİèŞèßèàèÓãáèâèãèäèåèæèçèèèéèêèëèìèíèîèïèğèñèòèóèôèõèöè÷èøèùèúèûèüèÓìıèşèÿèéé	éÔìÕìÖì×ìØìÙìÚìÛìÜìİìŞìßìàìáìâìãìäìåìæìçìèìéìêìëìììíìîìïìğìñìòìóìôì6ğõìöì2õ7ğ8ğ9ğ:ğ;ğ<ğ=ğ>ğ?ğ@ğAğBğCğDğEğFğGğHğIğJğKğLğMğNğOğóPğQğRğSğTğUğVğóZğ[ğóóóóóóóóóóóóó ó!ó"ó#ó$ó%ó&ó'ó(ó)ó*ó+ó3ó,ó-ó5õ6õ7õ8õ9õ:õ4ó;õ<õ=õ>õ?õ@õ.óAõ
+óBõCõDõEõFõGõHõŞöIõJõKõ5óøßöàöáöâöãöäöø	ø
+øøøøøøøøùèøìùéøùùù‘ù%ú|ú`úİ¡âªãªı°ó·•²ô·õ·˜¿™¿š¿›¿œ¿¿ÎÇŠÏÏÇ‹ÏŒÏâÖãÖ¡İÕãÖã×ãØã
+ééûìíùŞ¡x¥äªåªæªçªèªéªş°ÿ°±±±±±±±	±
+±±±±±±±ö·÷·ø·ù·ĞÇú·û·ü·ı·ş·ÿ·¸¸¸¸¸¸¸	¸
+¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¸¿¸Ÿ¿ ¿¡¿¢¿£¿¤¿¥¿¦¿§¿¨¿©¿ª¿«¿¬¿­¿®¿¯¿°¿±¿²¿³¿´¿µ¿¶¿·¿¸¿¹¿º¿»¿¼¿½¿¾¿¿¿À¿Á¿ÑÇÒÇÓÇÔÇÕÇÖÇÏ×ÇØÇÙÇÚÇÛÇÜÇİÇŞÇßÇàÇáÇâÇãÇäÇåÇæÇçÇèÇéÇêÇëÇìÇíÇîÇïÇğÇñÇòÇóÇôÇÏÏÏ‘Ï’Ï“Ï”Ï•Ï–Ï—Ï˜Ï™ÏšÏ›ÏœÏÏÏŸÏ Ï¡Ï¢Ï£Ï¤Ï¥Ï¦Ï§Ï¨Ï©ÏåÖæÖªÏ«Ï¬Ï­Ï®ÏèÖéÖêÖëÖìÖíÖîÖïÖğÖñÖòÖóÖôÖõÖöÖ÷ÖøÖùÖúÖçÖûÖüÖıÖşÖÿÖ×××××××	×
+×××××××××××××¯Ï×××××¢İ±Ï£İ¤İ¥İ¦İ§İ¨İ©İ×ªİ«İ¬İ­İ®İ¯İ°İ±İ²İ³İ´İµİ¶İ·İ¸İ¹İºİ»İ¼İ½İ¾İ×¿İÀİÁİÂİÃİÄİÅİÆİÇİÈİÉİÊİËİÙãÌİÍİÎİÏİĞİÑİÒİÚãÖİÛãÜãİãŞãßãàãáãâãããäãåãæãçãèãéãêãëãìãíãîãïãğãñãòãóãôãõãöã÷ãøãùãúãûãüãıãşãÿãääéééééééééééééééééééé é!é"é#é$é%é&é'é(é)é*é+é,é-é.é/é0é1é2é3é4éşìÿì]ğíıìíííííí:é	í
+íÓİíííííííííííííííííííí^ğ_ğ`ğağbğcğdğeğfğgğhğ\ğiğjğkğlğmğnğoğpğqğrğsğtğíuğ6ó7ó8ó9ó:ó;ó<ó=ó>ó?óQõRõSõTõvğUõVõWõXõYõZõèöéöêöëö]õìö^õíöøøøøøøøøìøíøîøïøğøñø’ùîù&ú'ú(úß¡±±¸ ¸È¿úÇûÇüÇıÇ_õòøà¡±±!¸É¿Ê¿Ë¿Ì¿Í¿şÇÿÇÈ²Ï³Ï×İØİÙİÚİäää	äóøá¡ºŸëª±±ìª±±±±#¸$¸%¸&¸'¸(¸)¸*¸+¸,¸-¸.¸/¸0¸1¸2¸3¸4¸5¸6¸7¸8¸9¸:¸;¸<¸=¸Î¿Ï¿Ğ¿Ñ¿Ò¿Ó¿Ô¿Õ¿Ö¿×¿Ø¿Ù¿Ú¿Û¿Ü¿İ¿Ş¿ß¿à¿á¿â¿ã¿ä¿å¿æ¿ç¿è¿é¿ê¿ë¿ì¿í¿î¿ï¿ğ¿ñ¿ò¿ó¿ô¿÷¿õ¿ÈÈÈÈÈÈ	È
+ÈÈÈÈÈÈÈÈÈÈÈÈÈÈÈÈÈÈ´ÏµÏ¶Ï·Ï¸Ï¹ÏºÏ»Ï¼Ï½Ï¾Ï¿ÏÀÏÈÁÏÂÏÃÏÄÏÅÏÆÏÇÏÈÏÉÏÊÏ×ËÏÌÏÍÏÜİ× ×!×"×#×$×%×&×'×(×)×*×+×,×-×.×/×0×1×2×3×4×5×6×7×8×È9×:×;×İİŞİßİàİáİâİãİäİåİæİçİèİéİêİëİìİíİîİïİğİñİ=×òİóİôİääääääääääääääääääää ä;é!ä<é=é>é?é@éAéBéCéDéEéFéGéHéIéJéKéLé#í$í%í&í'í(í)í*í+í,í-í.íOé/íMé0íwğxğyğzğ{ğ|ğ}ğ~ğğ€ğğ‚ğƒğBóCóDóEóFóGó`õaõbõcõdõeõïöğöñöòöøøôøøõø”ù•ù–ù—ù˜ù)úâ¡ã¡ä¡±ø¿È ÈÎÏ3í„ğ…ğø™ùz¥ ±A¸B¸ù¿ú¿û¿ü¿ı¿ş¿"ÈH¾#È$È!È%ÈÏÏĞÏ>×?×@×A×B×øİùİúİûİ&ä'ä(äıİ)äRéSéTéUéVé4í5í6í7í†ğ‡ğˆğ‰ğŠğHóIóJófõgõóöôöšùoå¡{¥íªîª°!±"±#±C¸À&È'ÈÒÏC×şİÿİ|¥$±%±ÀÀÀÀÀ(È)ÈÓÏ*È+ÈÔÏÕÏÖÏ×ÏØÏÙÏÚÏÛÏÜÏD×E×F×G×ŞŞŞŞŞ+äWéXé9í‹ğŒğKóLóMóhõöö÷öø ø›ù¥€¥&±'±(±)±*±+±,±D¸E¸F¸G¸H¸I¸J¸K¸L¸M¸N¸O¸P¸Q¸R¸S¸T¸U¸	À
+ÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀÀ À!À,È-È.È/È0È1È2È3È4È5ÈİÏŞÏ6È7È8È9È:È;È<È=È          }
                 }
             }
         }

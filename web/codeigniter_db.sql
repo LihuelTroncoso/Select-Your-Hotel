@@ -317,29 +317,6 @@ INSERT INTO `sliders_img` (`id`, `title`, `description`, `image`, `status`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sociallinks`
---
-
-CREATE TABLE `sociallinks` (
-  `id` int NOT NULL,
-  `social_name` varchar(255) NOT NULL,
-  `link` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sociallinks`
---
-
-INSERT INTO `sociallinks` (`id`, `social_name`, `link`) VALUES
-(1, 'Facebook', ''),
-(2, 'Twitter', ''),
-(3, 'Instagram', ''),
-(4, 'Linkdin', ''),
-(5, 'Skype', '');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `teams`
 --
 
@@ -489,12 +466,6 @@ ALTER TABLE `sliders_img`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `sociallinks`
---
-ALTER TABLE `sociallinks`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `teams`
 --
 ALTER TABLE `teams`
@@ -581,12 +552,6 @@ ALTER TABLE `site_config`
 --
 ALTER TABLE `sliders_img`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `sociallinks`
---
-ALTER TABLE `sociallinks`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `teams`

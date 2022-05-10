@@ -1,454 +1,2389 @@
-<!DOCTYPE html>
-<html lang="en">
-
-
-<!-- Mirrored from flatable.phoenixcoded.net/ltr/horizontal-static/dt-ext-fixed-header.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 May 2017 14:48:35 GMT -->
-<head>
-    <title>Flat Able - Premium Admin Template by Phoenixcoded</title>
-    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Phoenixcoded">
-    <meta name="keywords" content=", Flat ui, Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
-    <meta name="author" content="Phoenixcoded">
-    <!-- Favicon icon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <!-- Required Fremwork -->
-    <link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- themify-icons line icon -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
-    <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
-    <!-- flag icon framework css -->
-    <link rel="stylesheet" type="text/css" href="assets/pages/flag-icon/flag-icon.min.css">
-    <!-- Menu-Search css -->
-    <link rel="stylesheet" type="text/css" href="assets/pages/menu-search/css/component.css">
-    <!-- Data Table Css -->
-    <link rel="stylesheet" type="text/css" href="../../bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/pages/data-table/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="../../bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
-    <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <!--color css-->
-    <link rel="stylesheet" type="text/css" href="assets/css/color/color-1.css" id="color"/>
-</head>
-
-<body class="horizontal-static">
-    <!-- Pre-loader start -->
-    <div class="theme-loader">
-        <div class="ball-scale">
-            <div></div>
-        </div>
-    </div>
-    <!-- Pre-loader end -->
-    <!-- Menu header start -->
-    <nav class="navbar header-navbar">
-        <div class="navbar-wrapper">
-            <div class="navbar-logo">
-                <a class="mobile-menu" id="mobile-collapse" href="#!">
-                    <i class="ti-menu"></i>
-                </a>
-                <a class="mobile-search morphsearch-search" href="#">
-                    <i class="ti-search"></i>
-                </a>
-                <a href="index-2.html">
-                    <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
-                </a>
-                <a class="mobile-options">
-                    <i class="ti-more"></i>
-                </a>
-            </div>
-            <div class="navbar-container container-fluid">
-                <div>
-                    <ul class="nav-left">
-                        <li>
-                            <a id="collapse-menu" href="#">
-                                <i class="ti-menu"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="main-search morphsearch-search" href="#">
-                                <!-- themify icon -->
-                                <i class="ti-search"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#!" onclick="javascript:toggleFullScreen()">
-                                <i class="ti-fullscreen"></i>
-                            </a>
-                        </li>
-                        <li class="mega-menu-top">
-                            <a href="#">
-              Mega
-              <i class="ti-angle-down"></i>
-            </a>
-                            <ul class="show-notification row">
-                                <li class="col-sm-3">
-                                    <h6 class="mega-menu-title">Popular Links</h6>
-                                    <ul class="mega-menu-links">
-                                        <li><a href="form-elements-component.html">Form Elements</a></li>
-                                        <li><a href="button.html">Buttons</a></li>
-                                        <li><a href="map-google.html">Maps</a></li>
-                                        <li><a href="user-card.html">Contact Cards</a></li>
-                                        <li><a href="user-profile.html">User Information</a></li>
-                                        <li><a href="auth-lock-screen.html">Lock Screen</a></li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-3">
-                                    <h6 class="mega-menu-title">Mailbox</h6>
-                                    <ul class="mega-mailbox">
-                                        <li>
-                                            <a href="#" class="media">
-                                                <div class="media-left">
-                                                    <i class="ti-folder"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5>Data Backup</h5>
-                                                    <small class="text-muted">Store your data</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="media">
-                                                <div class="media-left">
-                                                    <i class="ti-headphone-alt"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5>Support</h5>
-                                                    <small class="text-muted">24-hour support</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="media">
-                                                <div class="media-left">
-                                                    <i class="ti-dropbox"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5>Drop-box</h5>
-                                                    <small class="text-muted">Store large amount of data in one-box only
-                        </small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="media">
-                                                <div class="media-left">
-                                                    <i class="ti-location-pin"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5>Location</h5>
-                                                    <small class="text-muted">Find Your Location with ease of use</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="col-sm-3">
-                                    <h6 class="mega-menu-title">Gallery</h6>
-                                    <div class="row m-b-20">
-                                        <div class="col-sm-4"><img class="img-fluid img-thumbnail" src="assets/images/mega-menu/01.jpg" alt="Gallery-1">
-                                        </div>
-                                        <div class="col-sm-4"><img class="img-fluid img-thumbnail" src="assets/images/mega-menu/02.jpg" alt="Gallery-2">
-                                        </div>
-                                        <div class="col-sm-4"><img class="img-fluid img-thumbnail" src="assets/images/mega-menu/03.jpg" alt="Gallery-3">
-                                        </div>
-                                    </div>
-                                    <div class="row m-b-20">
-                                        <div class="col-sm-4"><img class="img-fluid img-thumbnail" src="assets/images/mega-menu/04.jpg" alt="Gallery-4">
-                                        </div>
-                                        <div class="col-sm-4"><img class="img-fluid img-thumbnail" src="assets/images/mega-menu/05.jpg" alt="Gallery-5">
-                                        </div>
-                                        <div class="col-sm-4"><img class="img-fluid img-thumbnail" src="assets/images/mega-menu/06.jpg" alt="Gallery-6">
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm btn-block">Browse Gallery</button>
-                                </li>
-                                <li class="col-sm-3">
-                                    <h6 class="mega-menu-title">Contact Us</h6>
-                                    <div class="mega-menu-contact">
-                                        <div class="form-group row">
-                                            <label for="example-text-input" class="col-3 col-form-label">Name</label>
-                                            <div class="col-9">
-                                                <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="example-search-input" class="col-3 col-form-label">Email</label>
-                                            <div class="col-9">
-                                                <input class="form-control" type="email" placeholder="Enter your E-mail Id" id="example-search-input">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="example-search-input" class="col-3 col-form-label">Contact</label>
-                                            <div class="col-9">
-                                                <input class="form-control" type="number" placeholder="+91-9898989898" id="example-search-input">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="exampleTextarea" class="col-3 col-form-label">Message</label>
-                                            <div class="col-9">
-                                                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav-right">
-                        <li class="header-notification lng-dropdown">
-                            <a href="#" id="dropdown-active-item">
-                                <i class="flag-icon flag-icon-gb m-r-5"></i> English
-                            </a>
-                            <ul class="show-notification">
-                                <li>
-                                    <a href="#" data-lng="en">
-                                        <i class="flag-icon flag-icon-gb m-r-5"></i> English
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" data-lng="es">
-                                        <i class="flag-icon flag-icon-es m-r-5"></i> Spanish
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" data-lng="pt">
-                                        <i class="flag-icon flag-icon-pt m-r-5"></i> Portuguese
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" data-lng="fr">
-                                        <i class="flag-icon flag-icon-fr m-r-5"></i> French
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="header-notification">
-                            <a href="#!">
-                                <i class="ti-bell"></i>
-                                <span class="badge">5</span>
-                            </a>
-                            <ul class="show-notification">
-                                <li>
-                                    <h6>Notifications</h6>
-                                    <label class="label label-danger">New</label>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <img class="d-flex align-self-center" src="assets/images/user.png" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h5 class="notification-user">John Doe</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                            <span class="notification-time">30 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <img class="d-flex align-self-center" src="assets/images/user.png" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h5 class="notification-user">Joseph William</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                            <span class="notification-time">30 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <img class="d-flex align-self-center" src="assets/images/user.png" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h5 class="notification-user">Sara Soudein</h5>
-                                            <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                            <span class="notification-time">30 minutes ago</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="header-notification">
-                            <a href="#!" class="displayChatbox">
-                                <i class="ti-comments"></i>
-                                <span class="badge">9</span>
-                            </a>
-                        </li>
-                        <li class="user-profile header-notification">
-                            <a href="#!">
-                                <img src="assets/images/user.png" alt="User-Profile-Image">
-                                <span>John Doe</span>
-                                <i class="ti-angle-down"></i>
-                            </a>
-                            <ul class="show-notification profile-notification">
-                                <li>
-                                    <a href="#!">
-                                        <i class="ti-settings"></i> Settings
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="user-profile.html">
-                                        <i class="ti-user"></i> Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="email-inbox.html">
-                                        <i class="ti-email"></i> My Messages
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="auth-lock-screen.html">
-                                        <i class="ti-lock"></i> Lock Screen
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#!">
-                                        <i class="ti-layout-sidebar-left"></i> Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- search -->
-                    <div id="morphsearch" class="morphsearch">
-                        <form class="morphsearch-form">
-                            <input class="morphsearch-input" type="search" placeholder="Search..." />
-                            <button class="morphsearch-submit" type="submit">Search</button>
-                        </form>
-                        <div class="morphsearch-content">
-                            <div class="dummy-column">
-                                <h2>People</h2>
-                                <a class="dummy-media-object" href="#!">
-                                    <img class="round" src="http://0.gravatar.com/avatar/81b58502541f9445253f30497e53c280?s=50&amp;d=identicon&amp;r=G" alt="Sara Soueidan" />
-                                    <h3>Sara Soueidan</h3>
-                                </a>
-                                <a class="dummy-media-object" href="#!">
-                                    <img class="round" src="http://1.gravatar.com/avatar/9bc7250110c667cd35c0826059b81b75?s=50&amp;d=identicon&amp;r=G" alt="Shaun Dona" />
-                                    <h3>Shaun Dona</h3>
-                                </a>
-                            </div>
-                            <div class="dummy-column">
-                                <h2>Popular</h2>
-                                <a class="dummy-media-object" href="#!">
-                                    <img src="assets/images/avatar-1.png" alt="PagePreloadingEffect" />
-                                    <h3>Page Preloading Effect</h3>
-                                </a>
-                                <a class="dummy-media-object" href="#!">
-                                    <img src="assets/images/avatar-1.png" alt="DraggableDualViewSlideshow" />
-                                    <h3>Draggable Dual-View Slideshow</h3>
-                                </a>
-                            </div>
-                            <div class="dummy-column">
-                                <h2>Recent</h2>
-                                <a class="dummy-media-object" href="#!">
-                                    <img src="assets/images/avatar-1.png" alt="TooltipStylesInspiration" />
-                                    <h3>Tooltip Styles Inspiration</h3>
-                                </a>
-                                <a class="dummy-media-object" href="#!">
-                                    <img src="assets/images/avatar-1.png" alt="NotificationStyles" />
-                                    <h3>Notification Styles Inspiration</h3>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- /morphsearch-content -->
-                        <span class="morphsearch-close"><i class="icofont icofont-search-alt-1"></i></span>
-                    </div>
-                    <!-- search end -->
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Menu header end -->
-    <!-- Menu aside start -->
-    <div class="main-menu">
-        <div class="main-menu-header">
-            <img class="img-40" src="assets/images/user.png" alt="User-Profile-Image">
-            <div class="user-details">
-                <span>John Doe</span>
-                <span id="more-details">UX Designer<i class="icon-arrow-down"></i></span>
-            </div>
-        </div>
-        <div class="main-menu-content">
-            <ul class="main-navigation">
-                <li class="nav-item">
-                    <a href="#!">
-                        <i class="ti-home"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <ul class="tree-1">
-                        <li><a href="index-2.html">Default </a></li>
-                        <li><a href="widget.html">Widget</a></li>
-                        <li><a href="dashboard-ecommerce.html">Ecommerce</a></li>
-                        <li><a href="dashboard-crm.html">CRM</a></li>
-                        <li><a href="dashboard-analytics.html">Analytics</a></li>
-                        <li><a href="dashboard-project.html">Project</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#!">
-                        <i class="ti-layout"></i>
-                        <span>Layouts</span>
-                    </a>
-                    <ul class="tree-1">
-                        <li class="nav-sub-item"><a href="#">Vertical</a>
-                            <ul class="tree-2">
-                                <li><a href="http://flatable.phoenixcoded.net/ltr/vertical-static/menu-static.html" target="_blank">Static Layout</a></li>
-                                <li><a href="http://flatable.phoenixcoded.net/ltr/vertical-overlay/menu-header-fixed.html" target="_blank">Header Fixed</a></li>
-                                <li><a href="http://flatable.phoenixcoded.net/ltr/vertical-compact/menu-compact.html" target="_blank">Compact</a></li>
-                                <li><a href="http://flatable.phoenixcoded.net/ltr/vertical-sidebar-fixed/menu-sidebar.html" target="_blank">Sidebar Fixed</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-sub-item"><a href="#">Horizontal</a>
-                            <ul class="tree-2">
-                                <li><a href="menu-horizontal-static.html">Static Layout</a></li>
-                                <li><a href="http://flatable.phoenixcoded.net/ltr/horizontal-fixed/menu-horizontal-fixed.html">Fixed layout</a></li>
-                                <li><a href="http://flatable.phoenixcoded.net/ltr/horizontal-fixed-icon/menu-horizontal-icon-fixed.html">Fixed With Icon</a></li>
-                                <li><a href="http://flatable.phoenixcoded.net/ltr/horizontal-static-icon/menu-horizontal-icon.html">Static With Icon</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="http://flatable.phoenixcoded.net/ltr/bottom-menu/menu-bottom.html" target="_blank">Bottom Menu</a></li>
-                        <li><a href="box-layout.html" target="_blank">Box Layout</a>
-                            <label class="label label-warning menu-caption">NEW</label>
-                        </li>
-                        <li><a href="menu-rtl.html" target="_blank">RTL</a></li>
-                            <li><a href="navbar-light.html">Navbar</a></li>
-                                <li><a href="navbar-dark.html">Navbar Inverse</a></li>
-                                    <li><a href="navbar-elements.html">Navbar With Elements</a></li>
-                                        <li><a href="http://flatable.phoenixcoded.net/default/landingpage/index.html" target="_blank">Landing Page</a></li>
-                    </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#!">
-                            <i class="ti-layers"></i>
-                            <span>Pages</span>
-                        </a>
-                        <ul class="tree-1">
-                            <li class="nav-sub-item"><a href="#">Authentication</a>
-                                <ul class="tree-2">
-                                    <li><a href="auth-normal-sign-in.html" target="_blank">Login With BG Image</a></li>
-                                    <li><a href="auth-sign-in-social.html" target="_blank">Login With Social Icon</a></li>
-                                    <li><a href="auth-sign-in-social-header-footer.html" target="_blank">Login Social With Header And Footer</a></li>
-                                    <li><a href="auth-normal-sign-in-header-footer.html" target="_blank">Login With Header And Footer</a></li>
-                                    <li><a href="auth-sign-up.html" target="_blank">Registration BG Image</a></li>
-                                    <li><a href="auth-sign-up-social.html" target="_blank">Registration Social Icon</a></li>
-                                    <li><a href="auth-sign-up-social-header-footer.html" target="_blank">Registration Social With Header And Footer</a></li>
-                                    <li><a href="auth-sign-up-header-footer.html" target="_blank">Registration With Header And Footer</a></li>
-                                    <li><a href="auth-multi-step-sign-up.html" target="_blank">Multi Step Registration</a></li>
-                                    <li><a href="auth-reset-password.html" target="_blank">Forgot Password</a></li>
-                                    <li><a href="auth-lock-screen.html" target="_blank">Lock Screen</a></li>
-                                    <li><a href="auth-modal.html" target="_blank">Modal</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-sub-item"><a href="#">Maintenance</a>
-                                <ul class="tree-2">
-                                    <li><a href="error.html">Error</a></li>
+ificació/G
+publificava/A
+publiinformació/G
+publitramesa/E
+Púbol
+puc
+puça/E
+pucer/F
+Puçol
+puçolenc/F
+puçós/J
+pud
+puda/D
+pudelació/G
+pudelava/A
+puden/C
+pudent/E
+pudenta/E
+pudes
+pudi/D
+pudí
+pudia
+pudibund/F
+púdic/F
+púdicament
+pudicícia/E
+pudicitat/E
+pudida
+pudides
+pudíem
+pudien
+pudies
+pudíeu
+pudim/C
+pudin/C
+púding/E
+pudinga/E
+pudint/C
+pudir/C
+pudira
+pudirà
+pudiran
+pudiràs
+pudiré
+pudirem
+pudírem
+pudiren
+pudires
+pudireu
+pudíreu
+pudiria
+pudiríem
+pudirien
+pudiries
+pudiríeu
+pudis
+pudís
+pudíssem
+pudissen
+pudisses
+pudísseu
+pudíssim
+pudissin
+pudissis
+pudíssiu
+pudit
+pudits
+pudiu/C
+pudo
+púdol/E
+pudor/E
+pudorós/J
+pudorosament
+pudós/J
+pudu/E
+Puebla
+Puell
+puell/E
+puella/E
+puerícia/E
+puericultor/F
+puericultura/E
+pueril/E
+puerilitat/E
+puerilment
+puerperal/E
+puerperi/E
+Puerto
+puf/E
+pufí/G
+puga/D
+Pugenc
+pugenc/F
+Pugers
+Pugès
+pugesa/E
+Puget
+púgil/E
+pugilat/E
+pugilisme/E
+pugilista/E
+pugilístic/F
+pugna/E
+pugnaç/I
+pugnaces
+pugnacitat/E
+pugnava/A
+pugó/G
+puguem/C
+puguen/C
+pugues
+pugueu
+pugui/D
+puguin/C
+puguis
+Puig
+puig/E
+Puig-agut
+Puig-albó
+Puig-amalric
+Puig-argimon
+Puig-arnau
+Puig-arnol
+Puig-assalit
+Puig-avet
+Puigbaell
+Puigbagà
+Puigbalador
+Puigbarraca
+Puigbertran
+Puigblanquer
+Puigbò
+Puigbona
+Puigbonet
+Puigbòria
+Puigcalent
+Puigcarbó
+Puigcarrió
+Puigcercós
+Puigcerdà
+puigcerdanenc/F
+Puigcernau
+Puigcerver
+Puigcoder
+Puigcorber
+Puigcorona
+Puigcugul
+Puigdàlber
+Puigdàsens
+Puigdecanet
+Puigdefàbregues
+Puigdelacreu
+Puigdelmàs
+Puigdelràs
+Puigdemasa
+Puigdemont
+Puigdengola
+Puigdengoles
+puigdenvaller/F
+Puigderajols
+Puigdevall
+Puigdollers
+Puigdomènec
+Puigdorca
+Puigdorfila
+Puigduran
+Puig-ermós
+Puig-esteve
+Puigfel
+Puigferrà
+Puigferragut
+Puigferran
+Puigferrat
+Puigferrer
+Puigfeu
+Puiggalí
+Puiggarí
+Puiggarriga
+Puiggener
+Puiggenestós
+Puiggermanal
+Puiggibert
+Puiggimon
+Puiggirat
+Puiggrau
+Puiggrony
+Puiggròs
+Puiggueró
+Puigguillem
+Puig-i-pei
+Puig-i-vila
+Puig-llat
+Puiglloses
+Puigmacià
+Puigmajor
+Puigmal
+Puigmartí
+Puigmasdevall
+Puigmasó
+Puigmiquel
+Puigmitjà
+Puigmoler
+Puigmoltó
+Puigneró
+Puignou
+Puig-oliver
+Puig-oriol
+Puigpedró
+Puigpei
+Puigpelat
+Puigpinell
+Puigpinós
+Puigpiquer
+Puigpunyent
+puigpunyentí/H
+Puigpurós
+Puigqueró
+Puig-redon
+Puig-refagut
+Puig-reig
+Puig-roig
+Puig-rovira
+Puig-rubí
+Puigsalomó
+Puigsamper
+Puigsaulencs
+Puigsec
+Puigsegur
+Puigserinanell
+Puigserver
+Puigsesfosses
+Puigseslloses
+Puigsobirà
+Puigsoler
+Puigtió
+Puigtorrat
+Puigvalent
+Puigveí
+Puigvendrelló
+Puigventós
+Puigverd
+Puigvidal
+Puigvila
+Puigvinós
+Puigxoriguer
+puix
+puixança/E
+puixant/E
+puixantment
+Puixeu
+Puja
+puja/E
+Pujada
+pujada/E
+Pujades
+Pujador
+pujador/EF
+puja-i-baixa/E
+Pujal
+Pujalasús
+Pujaldevall
+Pujalet
+pujall/E
+Pujaló
+Pujalós
+Pujalpont
+Pujalràs
+Pujalriu
+Pujals
+Pujalt
+Pujaltó
+pujament/E
+pujança/E
+Pujant
+pujant/E
+Pujantell
+pujat/B
+pujava/A
+Pujó
+Pujol
+pujol/E
+Pujolana
+Pujolar
+pujolar/E
+Pujolàs
+Pujoldemont
+Pujoldevall
+Pujolet
+Pujolràs
+Pujolriu
+Pujols
+Pujós
+Pujot
+Pujou
+pulai/E
+pularda/E
+pulca/E
+pulcrament
+pulcre/F
+pulcritud/E
+Pulí
+Pulla
+pulla/E
+pullejava/A
+Pullès
+pullès/J
+pul·lòver/E
+pul·lulació/G
+pul·lulava/A
+pulmó/G
+pulmonar/E
+pulmonària/E
+pulmonat/B
+pulmonia/E
+púlpit/E
+pulpitis/E
+Pulquèria
+pulquèrrim/F
+pulquista/E
+pulsació/G
+púlsar/E
+pulsatil·la/E
+pulsatiu/B
+pulsímetre/E
+pulsió/G
+pulsòmetre/E
+pultrusió/G
+pulverimetal·lúrgia/E
+pulverulent/F
+pulvínul/E
+pum/E
+puma/E
+pumicita/E
+pumpel·lyita/E
+puna/E
+punah/E
+punció/G
+punctiforme/E
+pungent/E
+punible/E
+púnic/F
+punicàcia/E
+punicina/E
+punició/G
+punidor/F
+puniment/E
+puniré/MN
+punitiu/B
+punt/E
+punta/E
+puntacorrent/E
+puntada/E
+puntaire/E
+puntal/E
+puntala/E
+puntalets
+puntava/A
+puntcom/E
+puntegut/B
+punteig/E
+puntejadora/E
+puntejava/A
+puntellàs/I
+puntelletes
+punter/F
+punteria/E
+puntetes
+puntill/E
+puntillisme/E
+puntilló/G
+Puntils
+puntimirat/B
+puntona/E
+puntós/J
+puntosament
+puntuable/E
+puntuació/G
+puntual/E
+puntualitat/E
+puntualització/G
+puntualitzava/A
+puntualment
+puntuava/A
+puntura/E
+puntut/B
+punxa/E
+punxada/E
+punxant/E
+punxa-sàrries/E
+punxava/A
+punxegut/B
+punxent/E
+punxerut/B
+punxó/G
+punxonadora/E
+punxonament/E
+punxonava/A
+punxós/J
+punxoset/E
+punxut/B
+puny/CEU
+punya/E
+punyada/E
+punyal/E
+punyalada/E
+punyaler/F
+punyava/A
+punyent/E
+punyentment
+punyera/E
+Punyet
+punyeta/E
+punyeter/F
+punyeteria/E
+punyida/E
+punyiment/E
+punyiré/M
+puó/G
+pupa/E
+pupil/E
+pupil·la/E
+pupil·lar/E
+pupil·laritat/E
+pupil·latge/E
+pupinització/G
+pupitre/E
+puput/E
+pur/F
+purament
+puré
+purés
+puresa/E
+purga/E
+purgable/E
+purgació/G
+purgador/E
+purgament/E
+purgant/E
+purgat/E
+purgatiu/B
+purgatori/E
+purgava/A
+purí/G
+purificable/E
+Purificació
+purificació/G
+purificador/F
+purificament/E
+purificatori/K
+purificava/A
+puriforme/E
+purina/E
+purinera/E
+purínic/F
+purisme/E
+purista/E
+purità/H
+puritanisme/E
+puritat/E
+purna/E
+púrpura/E
+purpurat/E
+purpurescent/E
+purpuri/E
+purpurí/H
+purpúria/E
+purpúric/F
+Purrà
+púrria/E
+purrialla/E
+Purroi
+purulència/E
+purulent/F
+pus
+pusil·lànime/E
+pusil·lànimement
+pusil·lanimitat/E
+pústula/E
+pustulació/G
+pustulós/J
+put/C
+puta/E
+putada/E
+putaner/F
+putatiu/B
+Putelles
+puteria/E
+pútid/F
+putrefacció/G
+putrefacte/F
+putrefactiu/B
+putrescència/E
+putrescent/E
+putrescibilitat/E
+putrescible/E
+pútrid/F
+putridesa/E
+putriditat/E
+putrílag/E
+puts
+puttanesca
+putxinel·li/E
+putzolana/E
+putzolànic
+puzle/E
+PV
+pvt.
+q
+Qatar
+qatarià/H
+qua
+quad/E
+quadern/E
+quaderna/E
+quadernal/E
+quadr.
+quadra/E
+Quadrada
+quadradament
+Quadrades
+quadradet/E
+quadragenari/K
+quadragèsim/F
+quadragesimal/E
+quadrangle/E
+quadrangular/E
+quadrant/E
+quadrantal/E
+quadrantectomia/E
+Quadrat
+quadrat/BE
+quadratí/G
+quadràtic/F
+quadratura/E
+quadraturisme/E
+quadraturista/E
+quadrava/A
+quadravi/E
+quadràvia/E
+quadre/E
+quadrejadures
+quadrejava/A
+Quadrenc
+Quadreny
+Quadres
+quadreta/E
+quadribarrat/B
+quàdric/F
+quàdriceps/E
+quadricicle/E
+quadricromia/E
+quadrícula/E
+quadriculació/G
+quadriculava/A
+quadridimensional/E
+quadriennal/E
+quadrienni/E
+quadrifoli/E
+quadrifoliat/B
+quadrifonia/E
+quadrifònic/F
+quadrifont/E
+quadriga/E
+quadrigatus/E
+quadrigeminat/B
+quadrilàter/F
+quadrilió/G
+quadrilla/E
+quadriller/F
+quadrilòbul/E
+quadrilong/F
+quadrimestral/E
+quadrimestre/E
+quadrimotor/F
+quadrineboda/E
+quadrinebot/E
+quadrinét/E
+quadrinéta/E
+quadrioncle/E
+quadripol/E
+quadríptic/E
+quadritia/E
+quadrivector/E
+quadrivi/E
+quadrívium/E
+quadro/E
+quadró/G
+quadrumà/H
+quadrúpede/F
+quàdruple/EF
+quàdruplex/E
+quadruplicació/G
+quadruplicava/A
+qual/E
+qualcú
+qualcun/F
+qualificable/E
+qualificació/G
+qualificador/F
+qualificat/B
+qualificatiu/B
+qualificava/A
+qualitat/E
+qualitatiu/B
+qualitativament
+qualitativitat/E
+qualitologia/E
+qualitometria/E
+quall/E
+quallada/E
+Quallador
+quallallet/E
+quallava/A
+qualque
+qualsevol
+qualsevulla/E
+qualssevol
+quan
+quant/F
+quantia/E
+quàntic/F
+quantificable/E
+quantificació/G
+quantificador/E
+quantificava/A
+quantil/E
+quantitat/E
+quantitatiu/B
+quantitativament
+quantivalència/E
+quantra/E
+quàntum/E
+quàquer/F
+quaquerisme/E
+Quar
+quaranta
+quaranta-cinc
+quaranta-dos
+quaranta-dues
+quaranta-huit
+quaranta-nou
+quaranta-quatre
+quaranta-set
+quaranta-sis
+quaranta-tres
+quaranta-u
+quaranta-un
+quaranta-una
+quaranta-vuit
+quarantè/H
+quarantejava/A
+quarantena/E
+quarantenni/E
+quarantí/H
+quaresma/E
+quaresmal/E
+quaresmer/E
+quark/E
+quars/I
+quarsífer/F
+quarsita/E
+quarsós/J
+Quart
+quart/F
+quartà/GH
+quartal/E
+quartana/E
+quartat/B
+quartava/A
+quartejava/A
+Quartell
+quarteller/F
+quarter/EF
+quartera/E
+quarterada/E
+quarterat/B
+quarterava/A
+quarterback/E
+quarterejava/A
+quarteró/GH
+quarterola/E
+quartet/E
+quarteta/E
+quartí/G
+quàrtic/F
+quartil/E
+quartilla/E
+quarto/E
+quartó/G
+quartogènit/F
+quàsar/E
+quasi
+quasicontracte/E
+quasidelicte/E
+quasipossessió/G
+quasiusdefruit/E
+quàssia/E
+quatern/E
+quaterna/E
+quaternari/K
+quaternat/B
+quaternió/G
+quaternitat/E
+quatre/E
+Quatrecases
+quatre-centè/H
+quatre-centes/E
+quatrecentista/E
+quatre-cents/I
+quatrena/E
+quatreta/E
+Quatretonda
+Quatretondeta
+quatretondetí/H
+quatretondí/H
+qubba/E
+que/G
+què
+Quebec
+quebequès/J
+quebratxo/E
+quec/F
+queda/E
+quedada/E
+quedava/A
+quefer/E
+quefir/E
+qüefrència/E
+queia/O
+queix/I
+queixa/E
+Queixal
+queixal/E
+queixalada/E
+queixalava/A
+queixalejava/A
+queixaler/F
+Queixalós
+Queixàs
+queixava/A
+queixera/E
+Queixigar
+queixós/J
+queixut/B
+quelació/G
+quelant/E
+quelat/E
+quelcom
+quelícer/E
+quelicerat/E
+queloide/E
+queloïdosi/E
+queloni/E
+quelonídid/E
+quelve/E
+quema/E
+quemenjar/E
+quemosi/E
+quemòtic/F
+quemullar/E
+quenelle/E
+quenopodi/E
+quenopodiàcia/E
+quepis/E
+quequeig/E
+quequejava/A
+quequesa/E
+quequia/E
+Quer
+Quera
+quera/E
+Queralbs
+Queralt
+Queraltó
+queratina/E
+queratitis/E
+querava/A
+quercetina/E
+querella/E
+querellant/E
+querellava/A
+quermes/E
+quermesita/E
+qüern/E
+qüerna/E
+Queró
+querogen
+querògens
+Querol
+Querola
+Querolà
+Querós
+querosè/G
+Querot
+Quers
+querubí/G
+Quesa
+Quesada
+quesí/H
+quest/E
+questa/E
+quèstia/E
+qüestió/G
+qüestionable/E
+qüestionador/F
+qüestionari/E
+qüestionava/A
+qüestionejava/A
+qüestor/E
+qüestura/E
+Quet
+queta/E
+quetètid/E
+Quetgles
+quetoforal/E
+quetògnat/E
+quetsémper/E
+quètxup/E
+quetzal/E
+queviures
+qui
+quiasma/E
+quiasme/E
+quiastolita/E
+quibuts
+quic/E
+quica/E
+quico/F
+quicou/E
+quid/E
+quídam/E
+quiditat/E
+quiditatiu/B
+quiescència/E
+quiescent/E
+quiet/F
+quietament
+quietisme/E
+quietista/E
+quietud/E
+quil/E
+Quilià
+quilífer/F
+quilificació/G
+quilificava/A
+Quilis
+quilla/E
+quil·laia/E
+quillat/E
+quillava/A
+Quillet
+quilma/E
+quilmada/E
+quilo/E
+quilobit/E
+quilobyte/E
+quilocaloria/E
+quilocicle/E
+quilogram/E
+quilogràmetre/E
+quilohertz/E
+quilometratge/E
+quilometrava/A
+quilòmetre/E
+quilomètric/F
+quilomicró/G
+quilooctet/E
+quiloplàstia/E
+quilòpode/E
+quilopond/E
+quilós/J
+quilotona/E
+quilovolt/E
+quilowatt/E
+quilúria/E
+Quim
+quim/E
+quimera/E
+quimèric/F
+quimèricament
+quimèrid/E
+quimeriforme/E
+quimerós/J
+quimerut/B
+Quimesó
+químic/F
+químicament
+quimicofísic/F
+quimificació/G
+quimificava/A
+quimioadsorció/G
+quimioceptor/F
+quimiocina/E
+quimiolitòtrof/F
+quimiolitotròfia/E
+quimioluminescència/E
+quimioorganòtrof/F
+quimioorganotròfia/E
+quimioreceptor/F
+quimiosfera/E
+quimiosíntesi/E
+quimiosintètic/F
+quimiosintetitzador/F
+quimiotactisme/E
+quimiotaxi/E
+quimioteràpia/E
+quimioteràpic/F
+quimiotropisme/E
+quimisme/E
+quimògraf/E
+quimogràfic/F
+quimograma/E
+quimono/E
+quimós/J
+quin/F
+quina/E
+quinaire/E
+quinaldina/E
+quinari/K
+quinasa/E
+quinat/B
+Quinçà
+quincalla/E
+quincallaire/E
+quincaller/F
+quincalleria/E
+Quincià
+quincunci/E
+quindecàgon/E
+Quinidi
+quiniela/E
+quinina/E
+quinisme/E
+quinoide/E
+quinolina/E
+quinona/E
+quinonimina/E
+quinquagenari/K
+quinquagèsim/F
+quinquagesimal/E
+quinqué
+Quinqué
+quinquefoli/E
+quinquefoliat/B
+quinquennal/E
+quinquenni/E
+quinqués
+quint.
+Quint
+quint/F
+quinta/E
+Quintà
+quintà/G
+quintacolumnisme/E
+quintacolumnista/E
+quintada/E
+quintaessenciava/A
+Quintana
+quintana/E
+quintant/E
+quintar/E
+quintarada/E
+quintava/A
+quinter/E
+quintern/E
+quintet/E
+Quintí
+Quintilià
+Quintillà
+quintilló/G
+quinto/E
+quíntuple/EF
+quintuplicació/G
+quintuplicava/A
+quinze/E
+quinzè/H
+quinzena/E
+quinzenada/E
+quinzenal/E
+quinzenari/K
+quinzet/E
+quiosc/E
+quiosquer/F
+quipà/G
+quiquiriquic/E
+quiragra/E
+quiral/E
+quiralitat/E
+quirat/E
+quiratador/E
+Quirc
+quirema/E
+Quirgó
+quirguís/I
+Quirí
+Quirillac
+quirògraf/F
+quirografia/E
+quirogràfic/F
+quirologia/E
+quirològic/F
+quiromància/E
+quiromàntic/F
+quironomia/E
+quiropràctic/F
+quiròpter/E
+quiropterofília/E
+quirra/E
+quirúrgic/F
+quirúrgicament
+Quirze
+qui-sap-lo/F
+quisca/E
+quisleu/E
+quisso/F
+quissó/H
+quissoi/F
+quissoiava/A
+quissona/E
+quist/E
+quístic/F
+quistós/J
+quisvulla
+quitació/G
+quitament/E
+quitança/E
+quitava/A
+Quitèria
+Quitet
+quiti/E
+quítia/E
+quitina/E
+quitinós/J
+quitrà/G
+quitridi/E
+quitridiomicet/E
+quitridiomicot/E
+quitxalla/E
+quítxua/E
+quixot/E
+quixotada/E
+quixotesc/F
+quixotescament
+quixotisme/E
+quo
+quocient/E
+quòdlibet/E
+quodlibetal/E
+quòndam/E
+quòniam/E
+quòrum/E
+quota/E
+quotidià/H
+quotidianament
+quotidianitat/E
+r.
+R
+r
+R.
+1r
+3r
+rabada/E
+Rabadà
+rabadà/G
+Rabassa
+rabassa/E
+Rabassada
+rabassaire/E
+rabassell/E
+rabasser/E
+Rabassó
+rabassó/G
+rabassola/E
+rabassot/E
+rabassut/B
+rabasta/E
+rabatxet/E
+rabdologia/E
+rabdomància/E
+rabdomàntic/F
+rabdomiòlisi/E
+rabec/E
+rabeig/E
+rabejava/A
+rabent/E
+rabequet/E
+rabera/E
+Rabert
+rabí/G
+ràbia/E
+ràbic/F
+rabietat/E
+rabínic/F
+rabinisme/E
+rabinista/E
+Rabiola
+rabiola/E
+rabior/E
+rabiós/J
+rabiosament
+ràbita/E
+rabiüdament
+rabiüt/B
+Rabó
+Rabolhet
+rabona/E
+Rabós
+rabosa/E
+raboseria/E
+rabosí/H
+rabosot/E
+Rabró
+raca/E
+raça/E
+racament/E
+racèmic/F
+racemiforme/E
+racemització/G
+racemós/J
+racial/E
+ració/G
+raciocín
+raciocinació/G
+raciocinava/A
+raciocini/E
+racional/E
+racionalisme/E
+racionalista/E
+racionalitat/E
+racionalitzable/E
+racionalització/G
+racionalitzava/A
+racionalment
+racionament/E
+racionava/A
+racioner/F
+racisme/E
+racista/E
+raclet/E
+racó/G
+raconada/E
+raconer/F
+ràcord/E
+rad/E
+rada/E
+radar/E
+radarastronomia/E
+Radegunda
+radi/E
+radiació/G
+radiador/E
+radial/E
+radialment
+radian/E
+radiància/E
+radiant/E
+radiat/B
+radiatus
+radiava/A
+radicació/G
+radical/E
+radicalisme/E
+radicalitat/E
+radicalització/G
+radicalitzava/A
+radicalment
+radicand/E
+radicant/E
+radicava/A
+radicel·la/E
+radicícola/E
+radiciforme/E
+radícula/E
+radicular/E
+radiculitis/E
+ràdio/E
+radioactiu/B
+radioactivitat/E
+radioafeccionat/B
+radioaficionat/B
+radioastronomia/E
+radiobalisa/E
+radiocarboni/E
+radiocasset/E
+radiocomandament/E
+radiocomunicació/G
+radiodetector/E
+radiodiari/E
+radiodifusió/G
+radiodirigiré/MN
+radiodirigit/B
+radioelèctric/F
+radioelectricitat/E
+radioemissora/E
+radioenllaç/I
+radioestel/E
+radioesterilització/G
+radioesterilitzava/A
+radioestèsia/E
+radiofar/E
+radiòfon/E
+radiofonia/E
+radiofònic/F
+radiofont/E
+radiofreqüència/E
+radiogalàxia/E
+radiogoniòmetre/E
+radiogoniometria/E
+radiogoniomètric/F
+radiografia/E
+radiografiava/A
+radiogràfic/F
+radiograma/E
+radioimmunoassaig/E
+radioimmunoprecipitació/G
+radiointerferòmetre/E
+radiolari/E
+radiolarita/E
+radiòleg/E
+radiòlisi/E
+radiolit/E
+radiolocalització/G
+radiòloga/E
+radiologia/E
+radiològic/F
+radioluminescència/E
+radiometal·lografia/E
+radiòmetre/E
+radiometria/E
+radiomètric/F
+radiomissatgeria/E
+radionavegació/G
+radionovel·la/E
+radionúclid/E
+radiooient/E
+radioona/E
+radiopaquet/E
+radiopasteurització/G
+radiopasteuritzava/A
+radioprotecció/G
+radioquímica/E
+radioreceptor/E
+radiós/J
+radioscòpia/E
+radioscòpic/F
+radiosonda/E
+radiotècnia/E
+radiotècnic/F
+radiotelèfon/E
+radiotelefonia/E
+radiotelefònic/F
+radiotelefonista/E
+radiotelègraf/E
+radiotelegrafia/E
+radiotelegrafiava/A
+radiotelegràfic/F
+radiotelegrafista/E
+radiotelegrama/E
+radiotelescopi/E
+radioterapeuta/E
+radioteràpia/E
+radiotransmissió/G
+Rado
+radó/G
+radom/E
+radsimir/E
+Raduà
+ràdula/E
+raduliforme/E
+radurització/G
+raduritzava/A
+Raedor
+raent/ER
+Rafael
+Rafaela
+rafaelesc/F
+Rafal
+rafal/E
+rafalenc/F
+Rafaló
+rafània/E
+rafanistre/E
+Rafart
+rafe/E
+ràfec/E
+Rafeca
+rafega/E
+ràfega/E
+rafegada/E
+rafegut/B
+Rafel
+Rafela
+Rafelbunyol
+rafelbunyoler/F
+Rafelcofer
+rafeler/F
+Rafelguaraf
+rafelguarafí/H
+Rafels
+Ràfels
+Rafeques
+rafet/E
+rafflesiàcia/E
+rafi/E
+Rafí
+ràfia/E
+rafidi/E
+rafidofícia/E
+rafidòfit/E
+rafinosa/E
+rafió/G
+Ràfol
+Ráfol
+rafolenc/F
+rafolí/H
+ràfting/E
+ragatxo/E
+rager/F
+ragués/Q
+ragusà/G
+ragut/B
+rai/E
+raia/O
+Raïc
+raid/E
+Raier
+raier/F
+raïforme/E
+raig/E
+Raigada
+raigràs/I
+raiguer/E
+rail/E
+raïl/E
+Raïm
+raïm/E
+raima/E
+raïmada/E
+Raimat
+raïmat/E
+raïmava/A
+raïmera/E
+raïmet/E
+Raimí
+Raimon
+raïmós/J
+Raimundí
+Rainer
+Rainier
+Raió
+raió/G
+rais
+raïssa/E
+raïssos
+raja/E
+rajà
+rajada/E
+Rajadell
+rajaploma
+rajàs
+Rajau
+rajava/A
+rajol/E
+rajola/E
+rajoler/F
+rajoleria/E
+rajoleta/E
+rajolí/G
+Ral
+ral/E
+ralentí/G
+ralet/E
+Ralic
+ralinga/E
+ralingava/A
+rall/E
+rallador/F
+rallava/A
+Rallé
+raller/E
+Ralleu
+ral·li/E
+ral·licròs/I
+ràl·lid/E
+Ralló
+Ram
+ram/E
+rama/E
+ramada/E
+ramadà/G
+ramader/F
+ramaderia/E
+ramal/E
+ramalada/E
+ramalava/A
+ramalla/E
+ramallosa/E
+ramallut/B
+ramanxola/E
+ramària/E
+ramarol/E
+ramàs
+ramassa/E
+ramassada/E
+ramassat/E
+ramassava/A
+ramassos
+ramat/E
+ramatge/E
+ramava/A
+rambla/E
+ramblada/E
+ramblaire/E
+ramblejava/A
+rambler/F
+rambutan/E
+ramegall/E
+ramejat/B
+ramejava/A
+Ramell
+ramell/E
+rameller/EF
+Ramellets
+Ramelló
+Ramells
+ramera/E
+ramfàstid/E
+rami/E
+ramífer/F
+ramificació/G
+ramificava/A
+ramiflor/F
+ramiforme/E
+ramillet/E
+Raminyó
+Ramió
+Ramionet
+Ramir
+Ramírez
+Ramis
+ramitxó/G
+ramnàcia/E
+Ramon
+Ramoneda
+Ramonell
+Ramonet
+Ramonic
+Ramonjoan
+Ramos
+ramós/J
+rampa/E
+rampant/E
+rampell/E
+rampellada/E
+rampellava/A
+rampellut/B
+rampeu/Y
+rampí/G
+rampill/E
+rampillava/A
+rampín
+rampinador/F
+rampinava/A
+rampinya/E
+rampinyador/F
+rampinyava/A
+rampoina/E
+rampugoll/E
+rampugollava/A
+Rams
+ramulla/E
+ramut/B
+ran
+Ranc
+ranc/F
+rancallós/J
+ranci/E
+rància/E
+ranciejava/A
+ranciesa/E
+rancificació/G
+rancior/E
+rancor/E
+rancorós/J
+rancorosament
+rancúnia/E
+rancuniós/J
+rancuniosament
+Randa
+randa/E
+randaire/E
+randat/B
+randatge/E
+Rander
+rander/F
+ranejava/A
+ranera/E
+Ranes
+rang/E
+rani/E
+ranicultura/E
+rànid/E
+ranilla/E
+rànker/E
+ranquejava/A
+rànquing/E
+ransal/E
+rantell/E
+rànula/E
+ranular/E
+ranuncle/E
+ranunculàcia/E
+ranura/E
+ranvespre/E
+ranxer/F
+ranxo/E
+ranya/E
+Raó
+raó/G
+Raola
+raola/E
+raonable/E
+raonablement
+raonadament
+raonador/F
+raonament/E
+raonava/A
+raor/E
+rap/E
+rapa/E
+rapaç/I
+rapaces
+rapacitat/E
+rapaçment
+rapada/E
+rapador/F
+rapava/A
+rapè
+rapejava/A
+ràpel/E
+rapelador/E
+rapelava/A
+rapès
+ràpid/F
+ràpidament
+rapidesa/E
+rapiditat/E
+rapidor/F
+rapinya/E
+rapinyador/F
+rapinyaire/E
+rapinyant/E
+rapinyava/A
+rapinyer/F
+rapiré/MN
+rapis
+rapís
+rapissava/A
+Ràpita
+rapsode/F
+rapsòdia/E
+rapsòdic/F
+rapsodista/E
+raptava/A
+rapte/E
+raptor/F
+Raquel
+raqueta/E
+raqueter/F
+raquial/E
+raquidi/E
+raquídia/E
+raquis/E
+raquític/F
+raquíticament
+raquitis/E
+raquitisme/E
+rar/F
+rarament
+rarefà
+rarefaça/D
+rarefacció/G
+rarefacem/C
+rarefacen/C
+rarefaces
+rarefaceu
+rarefaci/D
+rarefacin/C
+rarefacis
+rarefactible/E
+rarefactiu/B
+rarefaent/E
+rarefaig
+rarefan
+rarefarà
+rarefaran
+rarefaràs
+rarefaré
+rarefarem
+rarefareu
+rarefaria
+rarefaríem
+rarefarien
+rarefaries
+rarefaríeu
+rarefàs
+rarefeia
+rarefèiem
+rarefeien
+rarefeies
+rarefèieu
+rarefem
+rarefent/C
+rarefer/C
+rarefera
+rareférem
+rareferen
+rareferes
+rareféreu
+rarefés/C
+rareféssem
+rarefessen
+rarefesses
+rarefésseu
+rareféssim
+rarefessin
+rarefessis
+rareféssiu
+rarefet
+rarefeta
+rarefetes
+rarefets
+rarefeu/C
+rareféu
+rarefiu
+rarejava/A
+raresa/E
+rarificable/E
+rarificació/G
+rarificant/E
+rarificatiu/B
+rarificava/A
+raritat/E
+Ras
+ras/IJ
+rasa/E
+rasadora/E
+rasament
+rasant/E
+rasava/A
+rascaculs/I
+rascada/E
+rascador/E
+rascadures
+rascanyós/J
+rascàs
+rascassa/E
+rascassos
+rascat/E
+rascava/A
+rascla/E
+rasclada/E
+rasclador/F
+rasclava/A
+rascle/E
+rascler/E
+rasclet/E
+rascleta/E
+rascletó/G
+rascló/G
+rasclonava/A
+rasclot/E
+rasclum/E
+rasclumejava/A
+raser/EF
+raseret/E
+Raset
+raseta
+Rasiguèras
+Rasigueres
+rasora/E
+raspa/E
+raspador/F
+raspadura/E
+Raspai
+Raspall
+raspall/E
+raspallada/E
+raspallament/E
+raspallava/A
+raspallera/E
+raspalleria/E
+raspament/E
+raspat/E
+raspava/A
+Raspeig
+raspera/E
+raspeta/E
+raspinell/E
+raspor/E
+raspós/J
+Rasquera
+rasquet/E
+rasqueta/E
+rassa/E
+rast/E
+rastell/E
+rastellat/B
+rastellatge/E
+rastellava/A
+rastellera/E
+rastral/E
+rastre/E
+rastreig/E
+rastrejador/F
+rastrejament/E
+rastrejava/A
+rastrera/E
+Rastrudis
+rasura/E
+rasurava/A
+rat/E
+rata/E
+ratador/F
+ratadura/E
+ratafia/E
+ratània/E
+ratapenada/E
+ratapeus/I
+ratapinyada/E
+ratat/B
+ratava/A
+rat-buf/E
+ratejava/A
+ratel/E
+rater/F
+Ratera
+ratera/E
+rateria/E
+Raters
+rateta/E
+raticida/E
+ratificable/E
+ratificació/G
+ratificava/A
+ratín
+ratina/E
+ratinadora/E
+ratinatge/E
+ratinava/A
+ràting/E
+ràtio/E
+Ratisbona
+ratlla/E
+ratllada/E
+ratllador/F
+ratlladura/E
+ratllat/B
+ratllava/A
+ratolí/G
+ratonejava/A
+ratoner/F
+ratpenat/E
+ratxa/E
+ratxada/E
+ratxava/A
+ratxós/J
+ratxosament
+ràtzia/E
+rau/CS
+Raubert
+rauc/EF
+raucador/F
+raucava/A
+Raül
+Raulí
+Raulina
+Raüll
+rau-rau/E
+raure/D
+rauré/T
+Raureig
+Raurell
+Rauric
+rautava/A
+rautija/E
+rauxa/E
+rauxós/J
+rauxosament
+raval/E
+ravata/E
+ravatat/B
+rave/E
+ravebleda/E
+ravegalla/E
+raveguí/G
+Ravenals
+ravenar/E
+Ravenell
+ravenell/E
+ravenera/E
+ravenet/E
+ravenissa/E
+Ravenna
+ravennès/J
+ravioli/E
+rayl/E
+rbla.
+RD
+RDA
+RDL
+RDLEG
+re
+rea/E
+reabsol/CS
+reabsoldre/D
+reabsoldré/T
+reabsolent/R
+reabsolgués/Q
+reabsolia/O
+reabsolt/F
+reabsorbiré/MN
+reabsorció/G
+reacció/G
+reaccionari/K
+reaccionarisme/E
+reaccionava/A
+reactància/E
+reactant/E
+reactiu/B
+reactivació/G
+reactivava/A
+reactivitat/E
+reactor/E
+readaptabilitat/E
+readaptable/E
+readaptació/G
+readaptava/A
+readmès/J
+readmet/CS
+readmet/Z
+readmetent/R
+readmetés/P
+readmetia/O
+readmetre/D
+readmetré/T
+readmissió/G
+readobant/E
+readobat/B
+readobatge/E
+readopció/G
+readoptava/A
+reafirmació/G
+reafirmava/A
+reagravació/G
+reagregació/G
+reagregava/A
+reajustament/E
+reajustava/A
+Real
+real/E
+realç/I
+realçable/E
+realçament/E
+realçava/A
+realegrava/A
+realer/F
+realgar/E
+realimentació/G
+realimentat/B
+realisme/E
+realista/E
+realitat/E
+realitzable/E
+realització/G
+realitzador/F
+realitzatiu/B
+realitzava/A
+realment
+Realp
+reamputació/G
+reanimació/G
+reanimava/A
+reanomenava/A
+reaparegués/Q
+reaparegut/B
+reapareix/CS
+reapareixent/R
+reaparèixer/C
+reapareixeré/T
+reapareixia/O
+reaparició/G
+rearmament/E
+rearmava/A
+rearranjament/E
+Reart
+reassegurador/F
+reassegurança/E
+reassegurava/A
+reassemblatge/E
+reassumiré/MN
+reassumpció/G
+reat/E
+Rebagliato
+rebaix/I
+rebaixa/E
+rebaixable/E
+rebaixador/F
+rebaixadura/E
+rebaixament/E
+rebaixatge/E
+rebaixava/A
+rebaixinc/E
+reballava/A
+rebals/I
+rebalsava/A
+rebat/CES
+rebat/Z
+rebatedor/EF
+rebatejava/A
+rebatent/ER
+rebatés/P
+rebatia/O
+rebatible/E
+rebatiment/E
+rebatre/D
+rebatré/T
+rebatuda/E
+rebatut/B
+rebava/E
+rebé
+rebec/F
+Rebeca
+rebeca/E
+rebecament
+rebecava/A
+rebedor/EF
+rebegués/Q
+rebegut/B
+rebel/E
+rebel·lava/A
+rebel·lia/E
+rebel·lió/G
+reben/Z
+rebent/R
+rebentada/E
+rebentador/F
+rebentaire/E
+rebentament/E
+rebentapisos/E
+rebentat/BE
+rebentava/A
+rebentisme/E
+rebequeria/E
+rebés/P
+rebesavi/E
+rebesàvia/E
+rebesneboda/E
+rebesnebot/E
+rebesnét/E
+rebesnéta/E
+rebesoncle/E
+rebestia/E
+rebeu/CS
+rebeure/D
+rebeuré/T
+rebevent/R
+rebevia/O
+rebia/O
+reblada/E
+reblador/F
+rebladura/E
+reblaniment/E
+reblaniré/MN
+reblava/A
+reble/E
+reblert/F
+rebliment/E
+rebliré/MN
+rebló/G
+reblonava/A
+reblum/E
+reblumalla/E
+rebobín
+rebobinador/F
+rebobinava/A
+reboda/E
+rebogada/E
+Rebogent
+rèbol/E
+rebolcada/E
+rebolcador/E
+rebolcall/E
+rebolcament/E
+rebolcava/A
+rebolcons
+Reboll
+reboll/E
+rebollada/E
+rebollam/E
+Rebollar
+rebollar/E
+rebollava/A
+Rebolleda
+rebolleda/E
+Rebollera
+Rebollet
+rebomboreig/E
+rebomborejava/A
+rebombori/E
+rebordall/E
+rebordeïment/E
+rebordeiré/MN
+rebordoniment/E
+rebordoniré/MN
+rebordonit/B
+Rebordós
+Rebordosa
+rebosillo/E
+rebost/E
+rebostejava/A
+reboster/F
+rebosteria/E
+rebot/CES
+rebot/Z
+rebotador/F
+rebotava/A
+rebotegava/A
+rebotent/R
+rebotés/P
+rebotia/O
+rebotiga/E
+rebotiré/MN
+rebotre/D
+rebotré/T
+rebotut/B
+rebre/D
+rebré/T
+rebrec/E
+rebregada/E
+rebregadís/B
+rebregadissa/E
+rebregava/A
+rebroll/E
+rebrollava/A
+rebrostava/A
+rebrot/E
+rebrotada/E
+rebrotava/A
+rebrotim/E
+rebuda/E
+rebuf/E
+rebufada/E
+rebufava/A
+rebuig
+rebuigs
+rebull/CEU
+rebulla/E
+rebullida/E
+rebulliré/M
+rebuscament/E
+rebuscat/B
+rebut/BE
+rebutjable/E
+rebutjall/E
+rebutjava/A
+rebutjos
+rec/E
+recaceig/E
+recacejava/A
+recaient/R
+recaiguda/E
+recaigués/Q
+recaigut/B
+recalada/E
+recalava/A
+recalc/E
+recalç/I
+recalcable/E
+recalcada/E
+recalcador/F
+recalcament/E
+recalcava/A
+recalçava/A
+recalcitrant/E
+recalcitrava/A
+recalescència/E
+recalmó/G
+recam/E
+recamava/A
+recambra/E
+recambró/G
+recança/E
+recanvi/E
+recanviava/A
+recapiat/E
+recapitulació/G
+recapitulava/A
+recaptable/E
+recaptació/G
+recaptador/F
+recaptament/E
+recaptava/A
+recapte/E
+recaptós/J
+recaragoladament
+recaragolament/E
+recaragolava/A
+recargoladament
+recargolament/E
+recargolava/A
+recàrrec/E
+recarregable/E
+recarregava/A
+Recasens
+recau/CS
+recaure/D
+recauré/T
+recautxutatge/E
+recautxutava/A
+recava/A
+recavava/A
+recció/G
+recel/E
+recelava/A
+recelós/J
+recelosament
+recensió/G
+recensor/F
+recent/E
+recental/E
+recentment
+recenyiré/MN
+recepció/G
+recepcionista/E
+recepta/E
+receptable/E
+receptacle/E
+receptacular/E
+receptador/F
+receptaire/E
+receptari/E
+receptava/A
+receptibilitat/E
+receptible/E
+receptici/E
+receptícia/E
+receptiu/B
+receptivitat/E
+receptor/F
+receptoria/E
+recer/E
+recerca/E
+recercador/F
+recercament/E
+recercat/B
+recercava/A
+recés
+recessió/G
+recessiu/B
+recessivitat/E
+recessos
+recialla/E
+reciari/E
+reciclable/E
+reciclat/E
+reciclatge/E
+reciclava/A
+recidiva/E
+recidivava/A
+recidivista/E
+recinglava/A
+recinte/E
+rècipe/E
+recipiendari/K
+recipient/E
+recíproc/F
+reciprocació/G
+recíprocament
+reciprocava/A
+reciprocitat/E
+recitació/G
+recitador/F
+recital/E
+recitat/E
+recitatiu/B
+recitava/A
+reclam/E
+reclamable/E
+reclamació/G
+reclamant/E
+reclamava/A
+reclau/E
+reclavava/A
+reclín
+reclinació/G
+reclinat/B
+reclinatori/E
+reclinava/A
+recloent/R
+reclogués/Q
+recloïa/O
+reclòs/J
+reclou/CS
+recloure/D
+reclouré/T
+reclús/J
+reclusió/G
+reclusiu/B
+recluta/E
+reclutador/F
+reclutament/E
+reclutava/A
+Recobert
+recobert/F
+recoble/E
+recobrable/E
+recobrament/E
+recobrava/A
+recobre/E
+recobreix/C
+recobreixen
+recobreixes
+recobreixi/D
+recobreixin/C
+recobreixis
+recobreixo
+recobresc
+recobresqui/D
+recobresquin/C
+recobresquis
+recobrí
+recobria
+recobríem
+recobrien
+recobries
+recobríeu
+recobrim/C
+recobriment/E
+recobrint/C
+recobrir/C
+recobrira
+recobrirà
+recobriran
+recobriràs
+recobriré
+recobrirem
+recobrírem
+recobriren
+recobrires
+recobrireu
+recobríreu
+recobriria
+recobriríem
+recobririen
+recobriries
+recobriríeu
+recobrís
+recobrisc
+recobrisca/D
+recobrisquen/C
+recobrisques
+recobríssem
+recobrissen
+recobrisses
+recobrísseu
+recobríssim
+recobrissin
+recobrissis
+recobríssiu
+recobriu/C
+recobrix/C
+recobrixen
+recobrixes
+recobro/E
+recoent/R
+recogitava/A
+recognició/G
+recognitiu/B
+recognoscible/E
+recogués/Q
+recogut/B
+recoïa/O
+recol·lecció/G
+recol·lectava/A
+recol·lecte/F
+recol·lector/F
+recolleta/E
+recollida/E
+recollidament
+recollidor/F
+recolliment/E
+recolliré/M
+recollita/E
+recol·locació/G
+recolonització/G
+recolonitzava/A
+Recolta
+recolzada/E
+recolzador/E
+recolzament/E
+recolzava/A
+recolze/E
+recomanable/E
+recomanablement
+recomanació/G
+recomanava/A
+recombín
+recombinació/G
+recombinava/A
+recomençament/E
+recomençava/A
+recompensa/E
+recompensable/E
+recompensació/G
+recompensador/F
+recompensava/A
+recomplert/F
+recompliré/MN
+recompon/CS
+recompondre/D
+recompondré/T
+recomponent/R
+recompongués/Q
+recomponia/O
+recomposició/G
+recompost/F
+recompra/E
+recomprava/A
+recomptava/A
+recompte/E
+reconcentració/G
+reconcentrava/A
+reconciliable/E
+reconciliació/G
+reconciliador/F
+reconciliava/A
+recondiré/MN
+recòndit/F
+reconditori/E
+reconducció/G
+reconduiré/MN
+reconegudament
+reconegués/Q
+reconegut/B
+reconeix/CS
+reconeixedor/F
+reconeixement/E
+reconeixença/E
+reconeixent/ER
+reconèixer/C
+reconeixeré/T
+reconeixia/O
+reconfigurable/E
+reconfort/E
+reconfortació/G
+reconfortador/F
+reconfortant/E
+reconfortava/A
+reconnexió/G
+reconquerible/E
+reconqueridor/F
+reconqueriré/MN
+reconquesta/E
+reconquista/E
+reconquistable/E
+reconquistador/F
+reconquistava/A
+reconsagrat/B
+reconsiderava/A
+reconstitució/G
+reconstituent/E
+reconstituïble/E
+reconstituïdor/F
+reconstituiré/MN
+reconstrucció/G
+reconstructor/F
+reconstruiré/MN
+recontador/F
+recontava/A
+reconvé
+reconven/C
+reconvén/C
+reconvenc
+reconvenció/G
+r</a></li>
                                     <li><a href="comming-soon.html">Comming Soon</a></li>
                                     <li><a href="offline-ui.html">Offline UI</a></li>
                                 </ul>
