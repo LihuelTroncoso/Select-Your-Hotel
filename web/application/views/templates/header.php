@@ -23,18 +23,18 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-5 display-6">
+    
+
       <li class="nav-item ">
         <a class="nav-link" aria-current="page" href="#">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Disabled</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Disabled</a>
-      </li>
+      <?php if(!$this->session->userdata('login')): ?>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/register">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a></li>
+      <?php endif; ?>
     </ul>
   </div>
 </nav>
