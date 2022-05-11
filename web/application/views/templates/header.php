@@ -10,7 +10,7 @@
   </head>
   <body>
   
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-bar-static-top">
   
   <div class="container-fluid">
     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="white" class="bi bi-building me-auto" viewBox="-1 0 16 16">
