@@ -73,7 +73,7 @@
 
 					//Set Message
 					$this->session->set_flashdata('user_loggedin', 'You are now logged in.');
-					redirect('users/dashboard');
+					redirect('home');
 				}else{
 					$this->session->set_flashdata('login_failed', 'Login is invalid.');
 					redirect('users/login');

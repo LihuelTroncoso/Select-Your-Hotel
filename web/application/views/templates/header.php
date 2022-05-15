@@ -26,7 +26,7 @@
     
 
       <li class="nav-item ">
-        <a class="nav-link" aria-current="page" href="#">Home</a>
+        <a class="nav-link" aria-current="page" href="<?php echo base_url(); ?>" >Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -35,6 +35,10 @@
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/register">Register</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a></li>
       <?php endif; ?>
+      <?php if($this->session->userdata('login')): ?>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/dashboard"><?php echo $this->session->userdata('username'); ?></a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/logout">Logout</a></li>
+         <?php endif; ?>
     </ul>
   </div>
 </nav>
