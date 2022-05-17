@@ -1,7 +1,7 @@
 <div class="container pb-5 mb-sm-1">
     <!-- Categories grid-->
     <div class="row">
-        <?php foreach($hotel as $hotels) : ?>
+        <?php foreach($hotel as $post) : ?>
             <div class="col-md-4 col-sm-6">
                 <div class="card border-0 mb-grid-gutter">
                     <a class="card-img-tiles" href="shop-style1-ls.html">
