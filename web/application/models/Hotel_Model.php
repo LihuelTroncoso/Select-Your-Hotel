@@ -6,10 +6,14 @@ class Hotel_Model extends CI_Model
         $this->load->database();
     }
 
-    public function get_hotels(){
+    public function get_hotels($slug = false){
         
-        $query = $this->db->get('hotel');
-        return $query->result_array();
-        
+        if($slug === false){
+            $query = $this->db->get('hotel');
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('hotel', array('slug' => $slug));
+        return $query->row_array();
     }
 }

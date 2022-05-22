@@ -16,6 +16,8 @@ $route['posts/create'] = 'posts/create';
 $route['posts/(:any)'] = 'posts/view/$1';
 $route['posts'] = 'posts/index';
 $route['default_controller'] = 'pages/view';
+$route['hotel/(:any)'] = 'hotel/view/$1';
+$route['hotel'] = 'hotel/view';
 
 
 

@@ -1,16 +1,18 @@
 <!-- To view the blog details -->
-<h2><?php echo $post['title']; ?></h2>
-<small class="post-date">Publicado: <?php echo $post['created_at']; ?></small><br>
-<img src="<?php echo site_url();?>assets/images/posts/<?php echo $post['post_image']; ?> ">
+<h2><?php echo $hotel['nombre']; ?></h2>
+<!--<small class="post-date">Publicado: <?php echo $post['created_at']; ?></small><br>-->
+<!--<img src="<?php echo site_url();?>assets/images/posts/<?php echo $post['post_image']; ?> ">-->
 <div class="post-body">
-	<?php echo $post['body']; ?>
+	<h2><?php echo $hotel['descripcion']; ?></h2>
 </div>
+<!--
 <?php if($this->session->userdata('user_id') == $post['user_id']): ?>
 	<a class="btn btn-default pull-left" href="<?php echo base_url(); ?>posts/edit/<?php echo $post['slug'] ?>">Edit</a>
 	<?php echo form_open('posts/delete/'.$post['id']); ?>
 		<input type="submit" value="delete" class="btn btn-danger">
 	</form>
 <?php endif; ?>
+-->
 <!-- To view the comment of the blog 
 <hr>
 <h3>Comments</h3>
