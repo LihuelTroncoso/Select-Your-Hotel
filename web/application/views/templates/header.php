@@ -29,7 +29,7 @@
         <a class="nav-link" aria-current="page" href="<?php echo base_url(); ?>" >Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>hotel/maps">Link</a>
       </li>
       <?php if(!$this->session->userdata('login')): ?>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/register">Register</a></li>

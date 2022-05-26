@@ -65,7 +65,6 @@
 				$encrypt_password = md5($this->input->post('password'));
 
 				$user_id = $this->Administrator_Model->adminLogin($email, $encrypt_password);
-				$sitelogo = $this->Administrator_Model->update_siteconfiguration(1);
 
 				if ($user_id && $user_id->role_id == 1) {
 					//Create Session
@@ -75,8 +74,6 @@
 				 				'email' => $user_id->email,
 				 				'login' => true,
 				 				'role' => $user_id->role_id,
-				 				'image' => $user_id->image,
-				 				'site_logo' => $sitelogo['logo_img']
 				 	);
 
 				 	$this->session->set_userdata($user_data);
