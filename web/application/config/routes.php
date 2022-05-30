@@ -36,8 +36,8 @@ $route['administrator/users/add-user'] = 'administrator/add_user';
 $route['administrator/users'] = 'administrator/users';
 $route['administrator/users/update-user/(:any)'] = 'administrator/update_user/$1';
 
-$route['administrator/blogs/add-blog'] = 'administrator/add_blog';
-$route['administrator/blogs/list-blog'] = 'administrator/list_blog';
+$route['administrator/add-hotel'] = 'administrator/add_hotel';
+$route['administrator/list-hotel'] = 'administrator/list_hotel';
 $route['administrator/blogs/update-blog'] = 'administrator/update_blog';
 
 $route['administrator/product-categories/create'] = 'administrator/create_product_category';
