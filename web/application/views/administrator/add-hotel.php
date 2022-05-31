@@ -10,9 +10,9 @@
                             </a>
                         </li>
                         <?php //print_r($viewBlogComments); ?>
-                        <li class="breadcrumb-item"><a href="<?php echo site_url();?>administrator/add-hotel">Add Blogs</a>
+                        <li class="breadcrumb-item"><a href="<?php echo site_url();?>administrator/add-hotel">Add hotels</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="<?php echo site_url();?>administrator/list-hotel">List Blogs</a>
+                        <li class="breadcrumb-item"><a href="<?php echo site_url();?>administrator/list-hotel">List hotels</a>
                         </li>
                     </ul>
                 </div>
@@ -25,30 +25,33 @@
                         <!-- Basic Form Inputs card start -->
                         <div class="card">                           
                             <div class="card-block">
-                            <?php echo form_open_multipart('administrator/blogs/add-blog'); ?>
-                              <div class="form-group col-sm-8">
-                                <label>Title</label>
-                                <input type="text" class="form-control" name="title" placeholder="Add Title">
-                              </div>
-                              <div class="form-group col-sm-6">
-                                <label>Category</label>
-                                <select name="category_id" class="form-control">
-                                <?php foreach ($categories as $category): ?>
-                                    <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
-                                <?php endforeach; ?>
-                                </select>
-                              </div>
+                            <?php echo form_open_multipart('administrator/add-hotel'); ?>
+                                <div class="form-group col-sm-8">
+                                  <label>Nombre</label>
+                                  <input type="text" class="form-control" name="nombre" placeholder="...">
+                                </div>
 
-                              <div class="form-group col-sm-6">
-                                <label>Upload Image</label><br>
-                                <input type="file" class="form-control" name="userfile" size="20">
-                              </div>
+                                <div class="form-group col-sm-8">
+                                  <label>Descripcion</label>
+                                  <input type="text" class="form-control" name="descripcion" placeholder="...">
+                                </div>
 
-                              <div class="form-group col-sm-12">
-                                <label>Body</label>
-                                <textarea id="editor1" class="form-control" name="body" placeholder="Add Body"></textarea>
-                              </div>
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group col-sm-6">
+                                  <label>Upload Image</label><br>
+                                  <input type="file" class="form-control" name="userfile" size="20">
+                                </div>
+
+                                <h3>Habitaciones</h3>
+                                <div class="form-group col-sm-6">
+                                  <label>Total de Habitaciones</label><br>
+                                  <input type="number" class="form-control" name="habitaciones" size="20">
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                  <label>Disponibles</label><br>
+                                  <input type="number" class="form-control" name="habitacionesDisp" size="20">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                             </div>
                         </div>

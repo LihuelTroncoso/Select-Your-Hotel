@@ -40,33 +40,6 @@ $route['administrator/add-hotel'] = 'administrator/add_hotel';
 $route['administrator/list-hotel'] = 'administrator/list_hotel';
 $route['administrator/blogs/update-blog'] = 'administrator/update_blog';
 
-$route['administrator/product-categories/create'] = 'administrator/create_product_category';
-$route['administrator/product-categories/update/(:any)'] = 'administrator/update_product_category/$1';
-$route['administrator/product-categories'] = 'administrator/product_categories';
-//$route['administrator/product-categories/(:any)'] = 'administrator/update_product_category/$1';
-
-$route['administrator/products/create'] = 'administrator/create_product';
-$route['administrator/products'] = 'administrator/get_products';
-$route['administrator/products/update/(:any)'] = 'administrator/update_products/$1';
-
-$route['administrator/faq-categories/create'] = 'administrator/create_faq_category';
-$route['administrator/faq-categories/update/(:any)'] = 'administrator/update_faq_category/$1';
-$route['administrator/faq-categories'] = 'administrator/faq_categories';
-
-$route['administrator/faq/create'] = 'administrator/create_faq';
-$route['administrator/faqs'] = 'administrator/get_faqs';
-$route['administrator/faqs/update/(:any)'] = 'administrator/update_faqs/$1';
-
-$route['administrator/scopages'] = 'administrator/get_scopages';
-$route['administrator/sco-pages/update/(:any)'] = 'administrator/update_scopages/$1';
-
-$route['administrator/sociallinks'] = 'administrator/get_sociallinks';
-$route['administrator/sociallinks/update/(:any)'] = 'administrator/update_sociallinks/$1';
-
-$route['administrator/sliders/create'] = 'administrator/create_slider';
-$route['administrator/sliders'] = 'administrator/get_sliders';
-$route['administrator/sliders/update/(:any)'] = 'administrator/update_slider/$1';
-
 $route['administrator/site-configuration'] = 'administrator/get_siteconfiguration';
 $route['administrator/site-configuration/update/(:any)'] = 'administrator/update_siteconfiguration/$1';
 

@@ -716,8 +716,8 @@
 
 			$data['title'] = 'Add Hotel';
 
-			$this->form_validation->set_rules('title', 'Title', 'required');
-			$this->form_validation->set_rules('body', 'Body', 'required');
+			$this->form_validation->set_rules('nombre', 'Nombre', 'required');
+			$this->form_validation->set_rules('descripcion', 'Descripcion', 'required');
 
 			if($this->form_validation->run() === FALSE){
 				$this->load->view('administrator/header-script');
@@ -727,7 +727,7 @@
 			   	$this->load->view('administrator/footer');	
 			}else{
 				//Upload Image
-				$config['upload_path'] = './assets/images/posts';
+				$config['upload_path'] = './assets/images/';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
 				$config['max_size'] = '2048';
 				$config['max_width'] = '2000';
@@ -746,7 +746,7 @@
 
 				//Set Message
 				$this->session->set_flashdata('post_created', 'Your post has been created.');
-				redirect('administrator/blogs/list-blog');
+				redirect('administrator/list-hotel');
 			}
 			
 		}
@@ -754,7 +754,7 @@
 		public function list_hotel($offset = 0){
 			// Pagination Config
 			$config['base_url'] = base_url(). 'administrator/blogs/';
-			$config['total_rows'] = $this->db->count_all('posts');
+			$config['total_rows'] = $this->db->count_all('hotel');
 			$config['per_page'] = 3;
 			$config['uri_segment'] = 3;
 			$config['attributes'] = array('class' => 'paginate-link');
@@ -762,16 +762,17 @@
 			// Init Pagination
 			$this->pagination->initialize($config);
 
-			$data['title'] = 'List of Blogs';
+			$data['title'] = 'List of Hotels';
 
-			$data['blogs'] = $this->Administrator_Model->listblogs(FALSE, $config['per_page'], $offset);
+			$data['hotels'] = $this->Administrator_Model->listblogs(FALSE, $config['per_page'], $offset);
 
 			$this->load->view('administrator/header-script');
 			$this->load->view('administrator/header');
 			$this->load->view('administrator/header-bottom');
-			$this->load->view('administrator/list-blogs', $data);
+			$this->load->view('administrator/list-hotel', $data);
 			$this->load->view('administrator/footer');
 		}
+
 		public function update_blog($blog_id = false){
 			// Check login
 			if(!$this->session->userdata('login')) {
