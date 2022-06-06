@@ -88,14 +88,6 @@
     <div class="main-body">
         <div class="page-wrapper">
             <!-- Page-header start -->
-
-    <?php if($this->session->flashdata('success')): ?>
-      <?php echo '<div class="alert alert-success icons-alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="icofont icofont-close-line-circled"></i>
-                </button>
-                <p><strong>Success! &nbsp;&nbsp;</strong>'.$this->session->flashdata('success').'</p></div>'; ?>
-    <?php endif; ?>
     <?php if($this->session->flashdata('danger')): ?>
       <?php echo '<div class="alert alert-danger icons-alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

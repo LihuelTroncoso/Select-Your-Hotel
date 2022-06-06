@@ -72,29 +72,22 @@ $(document).ready(function(){
                                 <thead>
                                     <tr>
                                        <th>Id</th>
-                                        <th>Image</th>
                                         <th>Title</th>
+                                        <th>Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php foreach($hotels as $hotel) : ?>
                                  <tr>
-                                        <td><?php echo $hotel['id']; ?></td>
+                                        <td><?php echo $hotel['idHotel']; ?></td>
+                                        <td><a href="<?php echo base_url(); ?>administrator/update_hotel/<?php echo $hotel['idHotel']; ?>"><?php echo $hotel['nombre']; ?></a></td>
+                                        <td><?php echo $hotel['descripcion']; ?></td>
                                         <td>
-                                            <img width="20px;" src="<?php echo site_url();?>assets/images/posts/<?php echo $hotel['image']; ?> ">                                           
-                                        </td>
-                                        <td><a href="<?php echo base_url(); ?>administrator/update_blog/<?php echo $hotel['id']; ?>"><?php echo $hotel['nombre']; ?></a></td>
-                                        <td>
-                                                <?php if($hotel['status'] == 1){ ?>
-                                               <a class="label label-inverse-primary enable" href='<?php echo base_url(); ?>administrator/enable/<?php echo $hotel['idHotel']; ?>?table=<?php echo base64_encode('posts'); ?>'>Enabled</a>
-                                                <?php }else{ ?> 
-                                                <a class="label label-inverse-warning disable" href='<?php echo base_url(); ?>administrator/desable/<?php echo $hotel['idHotel']; ?>?table=<?php echo base64_encode('posts'); ?>'>Disabled</a>
-                                                <?php } ?>
                                                 <!-- Edit Button -->
-                                                <a class="label label-inverse-info" href='<?php echo base_url(); ?>administrator/update_blog/<?php echo $hotel['idHotel']; ?>'>Edit</a>
+                                                <a class="label label-inverse-info" href='<?php echo base_url(); ?>administrator/update_hotel/<?php echo $hotel['idHotel']; ?>'>Edit</a>
                                                 <!-- Delete Button -->
-                                                <a class="label label-inverse-danger delete" href='<?php echo base_url(); ?>administrator/delete/<?php echo $hotel['idHotel']; ?>?table=<?php echo base64_encode('posts'); ?>'>Delete</a>
+                                                <a class="label label-inverse-danger delete" href='<?php echo base_url(); ?>administrator/delete/<?php echo $hotel['idHotel']; ?>?table=<?php echo base64_encode('hotel'); ?>'>Delete</a>
                                             
                                         </td>
                                     </tr>

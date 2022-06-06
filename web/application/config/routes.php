@@ -38,7 +38,7 @@ $route['administrator/users/update-user/(:any)'] = 'administrator/update_user/$1
 
 $route['administrator/add-hotel'] = 'administrator/add_hotel';
 $route['administrator/list-hotel'] = 'administrator/list_hotel';
-$route['administrator/blogs/update-blog'] = 'administrator/update_blog';
+$route['administrator/update-hotel'] = 'administrator/update_hotel';
 
 $route['administrator/site-configuration'] = 'administrator/get_siteconfiguration';
 $route['administrator/site-configuration/update/(:any)'] = 'administrator/update_siteconfiguration/$1';

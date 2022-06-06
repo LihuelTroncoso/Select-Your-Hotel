@@ -145,9 +145,9 @@
 				//Upload Image
 				$config['upload_path'] = './assets/images/users';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 
@@ -216,9 +216,11 @@
 
 		public function delete($id)
 		{
-			$table = base64_decode($this->input->get('table'));
-			//$table = $this->input->post('table');
-			$this->Administrator_Model->delete($id,$table);       
+			$data = $this->Administrator_Model->listHotels($id);
+			if(file_exists("./assets/images/hotels/".$data['image'])){
+				unlink("./assets/images/hotels/".$data['image']);
+			}
+			$this->Administrator_Model->deleteHotel($id);       
 			$this->session->set_flashdata('success', 'Data has been deleted Successfully.');
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
@@ -282,9 +284,9 @@
 				
 				$config['upload_path'] = './assets/images/users';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 
@@ -419,9 +421,9 @@
 				//Upload Image
 				$config['upload_path'] = './assets/images/products';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 
@@ -556,9 +558,9 @@
 				//Upload Image
 				$config['upload_path'] = './assets/images/products';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 
@@ -727,11 +729,11 @@
 			   	$this->load->view('administrator/footer');	
 			}else{
 				//Upload Image
-				$config['upload_path'] = './assets/images/';
+				$config['upload_path'] = './assets/images/hotels';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 
@@ -764,7 +766,7 @@
 
 			$data['title'] = 'List of Hotels';
 
-			$data['hotels'] = $this->Administrator_Model->listblogs(FALSE, $config['per_page'], $offset);
+			$data['hotels'] = $this->Administrator_Model->listHotels(FALSE, $config['per_page'], $offset);
 
 			$this->load->view('administrator/header-script');
 			$this->load->view('administrator/header');
@@ -773,50 +775,55 @@
 			$this->load->view('administrator/footer');
 		}
 
-		public function update_blog($blog_id = false){
+		public function update_hotel($hotel_id = false){
 			// Check login
 			if(!$this->session->userdata('login')) {
 				redirect('administrator/index');
 			}
 
-			$data['title'] = 'Edit Blog';
+			$data['title'] = 'Edit Hotel';
+			
+			$data['hotels'] = $this->Administrator_Model->listHotels($hotel_id);
 
-			$data['categories'] = $this->Post_Model->get_categories();
-			$data['post'] = $this->Administrator_Model->listblogs($blog_id);
-
-			$this->form_validation->set_rules('title', 'Title', 'required');
-			$this->form_validation->set_rules('body', 'Body', 'required');
+			$this->form_validation->set_rules('nombre', 'Nombre', 'required');
 
 			if($this->form_validation->run() === FALSE){
 				$this->load->view('administrator/header-script');
 			   	$this->load->view('administrator/header');
 			   	$this->load->view('administrator/header-bottom');
-			   	$this->load->view('administrator/update-blog', $data);
+			   	$this->load->view('administrator/update-hotel', $data);
 			   	$this->load->view('administrator/footer');	
 			}else{
 				//Upload Image
-				$config['upload_path'] = './assets/images/posts';
+				
+				$config['upload_path'] = './assets/images/hotels';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 
 				if(!$this->upload->do_upload()){
 					$errors =  array('error' => $this->upload->display_errors());
-					$data['postimg'] = $this->Administrator_Model->listblogs($this->input->post('id'));
-					$post_image = $data['postimg']['post_image'];
+					$data['postimg'] = $this->Administrator_Model->listHotels($this->input->post('id'));
+					$post_image = $data['postimg']['image'];
 				}else{
+					/* $data['oldImage'] = $this->Administrator_Model->listHotels($hotel_id);
+					if(file_exists("./assets/images/hotels/".$data['oldImage'])){
+						unlink("./assets/images/hotels/".$data['oldImage']);
+					} */
 					$data =  array('upload_data' => $this->upload->data());
 					$post_image = $_FILES['userfile']['name'];
+					
 				}
+
 
 				$this->Administrator_Model->update_blog_data($post_image);
 
 			    //Set Message
 			    $this->session->set_flashdata('success', 'Blog has been Updated Successfully.');
-			    redirect('administrator/blogs/list-blog');
+			    redirect('administrator/list-hotel');
 			}
 		}
 
@@ -904,9 +911,9 @@
 				//Upload Image
 				$config['upload_path'] = './assets/images';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 
@@ -1089,9 +1096,9 @@
 				
 				$config['upload_path'] = './assets/images/users';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '2000';
-				$config['max_height'] = '2000';
+				$config['max_size'] = '1000';
+				$config['max_width'] = '800';
+				$config['max_height'] = '600';
 
 				$this->load->library('upload', $config);
 

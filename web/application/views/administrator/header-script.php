@@ -7,9 +7,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" href="<?php echo base_url(); ?>admintemplate/assets/images/favicon.ico" type="image/x-icon">
     <!-- Google font-->
@@ -37,6 +34,7 @@
     <!--color css-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>admintemplate/assets/css/color/color-2.css" id="color"/>
     <script src="http://cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
+    
 </head>
 <body class="vertical-static">
     <!-- Pre-loader start -->

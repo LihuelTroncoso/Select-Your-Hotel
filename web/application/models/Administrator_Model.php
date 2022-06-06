@@ -48,10 +48,10 @@
 			return $this->db->insert('posts', $data);
 		}
 
-		public function delete($id,$table)
+		public function deleteHotel($id)
 		{
-			$this->db->where('id', $id);
-			$this->db->delete($table);
+			$this->db->where('idHotel', $id);
+			$this->db->delete('hotel');
 			return true;
 		}
 
@@ -484,7 +484,7 @@
 			return $this->db->insert('hotel', $data);
 		}
 
-		public function listblogs($blogId = FALSE, $limit = FALSE, $offset = FALSE)
+		public function listHotels($blogId = FALSE, $limit = FALSE, $offset = FALSE)
 		{
 			if ($limit) {
 				$this->db->limit($limit, $offset);
@@ -496,22 +496,21 @@
 				return $query->result_array(); 
 			}
 
-			$query = $this->db->get_where('hotel', array('id' => $blogId));
+			$query = $this->db->get_where('hotel', array('idHotel' => $blogId));
 			return $query->row_array();
 		}
 
 	
 		public function update_blog_data($post_image){
-			$slug = url_title($this->input->post('title'), "dash", TRUE);
+			$slug = url_title($this->input->post('nombre'), "dash", TRUE);
 			$data = array(
-				'title' => $this->input->post('title'), 
+				'nombre' => $this->input->post('nombre'), 
 			    'slug' => $slug,
-			    'body' => $this->input->post('body'),
-			    'category_id' => $this->input->post('category_id'),
-			    'post_image' => $post_image
+			    'descripcion' => $this->input->post('descripcion'),
+			    'image' => $post_image
 			    );
-			$this->db->where('id', $this->input->post('id'));
-			return $this->db->update('posts', $data);
+			$this->db->where('idHotel', $this->input->post('id'));
+			return $this->db->update('hotel', $data);
 		}
 
 		public function list_blog_comments()
