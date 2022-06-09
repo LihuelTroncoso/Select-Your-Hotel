@@ -1,8 +1,4 @@
 <div class="container pb-5 mb-sm-1">
-    <!-- Categories grid-->
-
-
-    
     <div class="row">
         <?php foreach($hotels as $hotel) : ?>
             <div class="col-md-4 col-sm-6">

@@ -1,10 +1,10 @@
-<!-- To view the blog details -->
 <h2><?php echo $hotel['nombre']; ?></h2>
-<!--<small class="post-date">Publicado: <?php echo $post['created_at']; ?></small><br>-->
-<!--<img src="<?php echo site_url();?>assets/images/posts/<?php echo $post['post_image']; ?> ">-->
+<img src="<?php echo site_url();?>assets/images/hotels/<?php echo $hotel['post_image']; ?> ">
 <div class="post-body">
 	<h2><?php echo $hotel['descripcion']; ?></h2>
 </div>
+
+<a class="btn btn-pill btn-outline-primary btn-sm" href="<?php echo site_url('/reserva'); ?>">Haga su reserva</a>
 <!--
 <?php if($this->session->userdata('user_id') == $post['user_id']): ?>
 	<a class="btn btn-default pull-left" href="<?php echo base_url(); ?>posts/edit/<?php echo $post['slug'] ?>">Edit</a>

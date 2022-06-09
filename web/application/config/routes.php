@@ -15,6 +15,7 @@ $route['posts/delete/(:any)'] = 'posts/delete/$1';
 $route['posts/create'] = 'posts/create';
 $route['posts/(:any)'] = 'posts/view/$1';
 $route['posts'] = 'posts/index';
+$route['reserva'] = 'reserva';
 $route['default_controller'] = 'pages/view';
 $route['hotel/(:any)'] = 'hotel/view/$1';
 $route['hotel'] = 'hotel/view';
