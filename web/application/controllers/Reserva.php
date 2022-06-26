@@ -3,6 +3,7 @@
     {
         public function index($slug = NULL)
         {
+            $this->load->model('Hotel_Model');
             if(!$this->session->userdata('login')) {
                 redirect('users/login');
             }
@@ -18,8 +19,9 @@
 				$this->load->view('templates/footer');
             }else{
                 if($this->Hotel_Model->book($slug)){
-                    redirect('pages/view')
+                    redirect('pages/view');
                 }else{
+                    show404();
                 }
 
             }

@@ -17,7 +17,7 @@ class Hotel_Model extends CI_Model
     }
 
     public function get_id_hotel($slug){
-        $query = $this->db->query('SELECT idHotel FROM hotel WHERE slug = '$slug'');
+        $query = $this->db->query('SELECT idHotel FROM hotel WHERE slug = '.$slug.'');
         return $query->row_array();
     }
 
@@ -29,6 +29,6 @@ class Hotel_Model extends CI_Model
             $dateEnd = $this->input->post('departure')
         );
 
-        return $this->db->insert('hotel', $data);
+        return $this->db->insert('reserva', $data);
     }
 }
