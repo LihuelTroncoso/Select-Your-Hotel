@@ -4,7 +4,7 @@
 	<h2><?php echo $hotel['descripcion']; ?></h2>
 </div>
 
-<a class="btn btn-pill btn-outline-primary btn-sm" href="<?php echo site_url('/reserva'); ?>">Haga su reserva</a>
+<a class="btn btn-pill btn-outline-primary btn-sm" href="<?php echo site_url('/reserva/'.$hotel['slug']); ?>">Haga su reserva</a>
 <!--
 <?php if($this->session->userdata('user_id') == $post['user_id']): ?>
 	<a class="btn btn-default pull-left" href="<?php echo base_url(); ?>posts/edit/<?php echo $post['slug'] ?>">Edit</a>

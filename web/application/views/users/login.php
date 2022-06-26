@@ -15,3 +15,5 @@
 	</div>
 </div>
 <?php echo form_close() ?>
+<div class="text-center mt-2">or</div>
+<div class="h5 text-center mt-2"><a href=<?php echo site_url('/users/register')?>>Register</a></div>

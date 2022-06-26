@@ -10,9 +10,7 @@
 			$data['title'] = ucfirst($page);
 
 			$data['hotels'] = $this->Hotel_Model->get_hotels();
-			if (empty($data['hotels'])) {
-				show_404();
-			}
+			
 			$this->load->view('templates/header');
 			$this->load->view('pages/'.$page, $data);
 			$this->load->view('templates/footer');
