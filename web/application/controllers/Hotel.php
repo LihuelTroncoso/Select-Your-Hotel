@@ -1,9 +1,9 @@
 <?php
 class Hotel extends CI_Controller
 {
-    public function view($slug = NULL){
+    public function view($id = NULL){
         $this->load->model("Hotel_Model");
-        $data['hotel'] = $this->Hotel_Model->get_hotels($slug);
+        $data['hotel'] = $this->Hotel_Model->get_hotel_by_id($id);
         if (empty($data['hotel'])) {
             show_404();
         } 
@@ -14,5 +14,9 @@ class Hotel extends CI_Controller
 
     public function maps(){
         
+    }
+
+    public function myReserves(){
+
     }
 }

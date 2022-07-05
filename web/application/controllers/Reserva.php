@@ -1,9 +1,15 @@
 <?php 
     class Reserva extends CI_Controller
     {
-        public function index($slug = NULL)
+        public function index($id = NULL)
         {
+            $this->load->model('Reserve_Model');
             $this->load->model('Hotel_Model');
+            $data['hotel'] = $this->Hotel_Model->get_hotel_by_id($id);
+            if (empty($data['hotel'])) {
+                show_404();
+            } 
+            
             if(!$this->session->userdata('login')) {
                 redirect('users/login');
             }
@@ -15,17 +21,30 @@
             
             if ($this->form_validation->run() === FALSE) {
                 $this->load->view('templates/header');
-                $this->load->view('pages/reserva');
+                $this->load->view('pages/reserva', $data);
 				$this->load->view('templates/footer');
             }else{
-                if($this->Hotel_Model->book($slug)){
-                    redirect('pages/view');
+                if($this->Reserve_Model->insert_reserve($id)){
+                    redirect('');
                 }else{
-                    show404();
+                    show_404();
                 }
-
             }
 
         }
         
+        public function myReserves(){
+            $this->load->model('Reserve_Model');
+            $this->load->model('Hotel_Model');
+
+            $data['reserves'] = $this->Reserve_Model->get_reserves();
+            $data['hotels'] = $this->Hotel_Model->get_hotels_by_reserve($data['reserves']);
+            if(empty($data['hotels'])){
+                show_404();
+            }
+
+            $this->load->view('templates/header');
+            $this->load->view('pages/myReserves', $data);
+            $this->load->view('templates/footer');
+        }
     }

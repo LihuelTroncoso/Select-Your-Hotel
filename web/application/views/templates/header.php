@@ -36,7 +36,7 @@
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a></li>
       <?php endif; ?>
       <?php if($this->session->userdata('login')): ?>
-            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/dashboard"><?php echo $this->session->userdata('username'); ?></a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>myReserves"><?php echo "My Reserves" ?></a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo base_url(); ?>users/logout">Logout</a></li>
          <?php endif; ?>
     </ul>

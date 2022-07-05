@@ -22,14 +22,15 @@
 }
 </script>
 
-<?php echo form_open('reserva'); ?>
+<?php echo validation_errors(); ?>
+<?php echo form_open('reserva/'.$hotel['idHotel']); ?>
   <div class="elem-group">
     <label for="name">Your Name</label>
-    <input type="text" id="name" name="visitor_name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required>
+    <input type="text" id="name" name="name" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required>
   </div>
   <div class="elem-group">
     <label for="email">Your E-mail</label>
-    <input type="email" id="email" name="visitor_email" placeholder="john.doe@email.com" required>
+    <input type="email" id="email" name="email" placeholder="john.doe@email.com" required>
   </div>
   <hr>
   <div class="elem-group inlined">
@@ -46,7 +47,7 @@
   </div>
   <div class="elem-group inlined">
     <label for="departure">Departure Date</label>
-    <input type="date" id="departure-date" name="departure" required>
+    <input type="date" id="departure" name="departure" required>
   </div>
   <hr>
   <div class="elem-group">

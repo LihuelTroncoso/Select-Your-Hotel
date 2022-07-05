@@ -16,19 +16,14 @@ class Hotel_Model extends CI_Model
         return $query->row_array();
     }
 
-    public function get_id_hotel($slug){
-        $query = $this->db->query('SELECT idHotel FROM hotel WHERE slug = '.$slug.'');
+    public function get_hotel_by_id($id){
+        $query = $this->db->query('SELECT * FROM hotel WHERE idHotel = '.$id);
         return $query->row_array();
     }
 
-    public function book($slug){
-        $data = array(
-            $hotel_idHotel = get_id_hotel($slug),
-            $users_id = $this->session->userdata('user_id'),
-            $dateStart = $this->input->post('arrival'),
-            $dateEnd = $this->input->post('departure')
-        );
-
-        return $this->db->insert('reserva', $data);
+    public function get_hotels_by_reserve($reserve){
+        $query = $this->db->get_where('hotel', array('idHotel' => $reserve['hotel_idHotel']));
+        return $query->result_array();
     }
+
 }
