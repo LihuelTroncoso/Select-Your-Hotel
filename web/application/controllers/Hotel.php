@@ -8,7 +8,7 @@ class Hotel extends CI_Controller
             show_404();
         } 
         $this->load->view('templates/header');
-        $this->load->view('posts/view', $data);
+        $this->load->view('pages/view', $data);
         $this->load->view('templates/footer');
     }
 

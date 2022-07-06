@@ -37,14 +37,16 @@
             $this->load->model('Reserve_Model');
             $this->load->model('Hotel_Model');
 
-            $data['reserves'] = $this->Reserve_Model->get_reserves();
-            $data['hotels'] = $this->Hotel_Model->get_hotels_by_reserve($data['reserves']);
-            if(empty($data['hotels'])){
-                show_404();
-            }
+            $data['hotels'] = $this->Hotel_Model->get_hotels_by_reserve();
 
-            $this->load->view('templates/header');
-            $this->load->view('pages/myReserves', $data);
-            $this->load->view('templates/footer');
+            if($data['hotels']){
+                $this->load->view('templates/header');
+                $this->load->view('pages/myReserves', $data);
+                $this->load->view('templates/footer');
+            }else{
+                $this->load->view('templates/header');
+                $this->load->view('pages/reserveNow');
+                $this->load->view('templates/footer');
+            }
         }
     }

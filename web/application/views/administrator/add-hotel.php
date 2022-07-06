@@ -33,7 +33,7 @@
 
                                 <div class="form-group col-sm-8">
                                   <label>Descripcion</label>
-                                  <input type="text" class="form-control" name="descripcion" placeholder="...">
+                                  <input type="body" class="form-control" name="descripcion" placeholder="...">
                                 </div>
 
                                 <div class="form-group col-sm-6">

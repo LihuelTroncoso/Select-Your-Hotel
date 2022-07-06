@@ -16,8 +16,4 @@ class Reserve_Model extends CI_Model
         return $this->db->insert('reserva', $data);
     }
 
-    public function get_reserves(){
-        $query = $this->db->get_where('reserva', array('users_id' => $this->session->userdata('user_id')));
-        return $query->result_array();
-    }
 }

@@ -21,8 +21,22 @@ class Hotel_Model extends CI_Model
         return $query->row_array();
     }
 
-    public function get_hotels_by_reserve($reserve){
-        $query = $this->db->get_where('hotel', array('idHotel' => $reserve['hotel_idHotel']));
+    public function get_hotels_by_reserve(){
+        $this->db->select('*');
+        $this->db->from('hotel'); 
+        $this->db->join('reserva', 'reserva.hotel_idHotel = hotel.idHotel');
+        $this->db->join('users', 'reserva.users_id = users.id');
+        $this->db->where('users.id', $this->session->userdata('user_id'));
+        $this->db->order_by('reserva.dateStart','asc');       
+        $query = $this->db->get(); 
+        if($query->num_rows() != 0)
+        {
+            return $query->result_array();
+        }
+        else
+        {
+            return false;
+        }
         return $query->result_array();
     }
 
