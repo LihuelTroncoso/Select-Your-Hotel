@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-07-2022 a las 05:35:42
+-- Tiempo de generación: 11-07-2022 a las 04:52:56
 -- Versión del servidor: 8.0.25
 -- Versión de PHP: 8.0.10
 
@@ -47,13 +47,6 @@ CREATE TABLE `hotel` (
   `slug` varchar(45) NOT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Volcado de datos para la tabla `hotel`
---
-
-INSERT INTO `hotel` (`idHotel`, `nombre`, `descripcion`, `telefono`, `slug`, `image`) VALUES
-(15, 'Hotel 2', '<p>O2 HOTEL IGUAZU se sit&uacute;a en Puerto Iguaz&uacute;. Cuenta con piscina al aire libre de temporada, wi-fi gratis en zonas comunes y servicio de spa, adem&aacute;s de sauna.<br />\r\n<br />\r\nNecesitas saber:<br />\r\n&bull; Acceso a unidades por escaleras<br />\r\n&bull; Accesible para personas con movilidad reducida<br />\r\n&bull; Unidades adaptadas a personas con movilidad reducida<br />\r\n&bull; Men&uacute; apto para cel&iacute;acos<br />\r\n<br />\r\nEl alojamiento sirve diariamente el desayuno, el cual se ofrece en el restaurante. Tambi&eacute;n dispone de bar y snack bar, as&iacute; como bar en &aacute;rea de piscina. El personal de la propiedad proporcionar&aacute; servicio a la habitaci&oacute;n.<br />\r\n<br />\r\nEntre los servicios de la propiedad se encuentran servicio de masajes, estacionamiento limitado, gimnasio y recepci&oacute;n 24 hrs. Los hu&eacute;spedes tambi&eacute;n podr&aacute;n disfrutar de servicio de guarda-equipaje gratis y informaci&oacute;n tur&iacute;stica. Por un suplemento, la propiedad cuenta con servicio de lavander&iacute;a.</p>\r\n', NULL, 'hotel-2', 'hotel2.jpg');
 
 -- --------------------------------------------------------
 
@@ -121,7 +114,8 @@ INSERT INTO `reserva` (`idReserva`, `hotel_idHotel`, `users_id`, `dateStart`, `d
 (3, 15, 2, '2022-07-06 03:00:00', '2022-07-12 03:00:00'),
 (4, 15, 2, '2022-07-06 03:00:00', '2022-07-10 03:00:00'),
 (5, 15, 1, '2000-10-11 03:00:00', '2000-10-12 03:00:00'),
-(6, 15, 3, '2022-07-07 03:00:00', '2022-07-11 03:00:00');
+(6, 15, 3, '2022-07-07 03:00:00', '2022-07-11 03:00:00'),
+(7, 15, 2, '2022-07-16 03:00:00', '2022-07-23 03:00:00');
 
 -- --------------------------------------------------------
 
@@ -148,7 +142,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `username`, `contact`, `role_id`, `dob`, `register_date`) VALUES
 (1, 'Administrator', 'ynandan55@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'yadu', '12312312', 1, '1990-08-03', '2017-08-18 22:16:38'),
 (2, 'lihuel', 'lihueltroncoso@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'lihuel200', '', 0, '', '2022-06-14 01:22:04'),
-(3, 'lihuel', 'bermupedia@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'lihuel16', '', 0, '', '2022-07-06 02:43:21');
+(3, 'lihuel', 'bermupedia@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'lihuel16', '', 0, '', '2022-07-06 02:43:21'),
+(4, 'asdasdas', 'lihuel200@hotmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'lihuel20', '', 0, '', '2022-07-11 02:36:09');
 
 --
 -- Índices para tablas volcadas
@@ -216,7 +211,7 @@ ALTER TABLE `habitaciones`
 -- AUTO_INCREMENT de la tabla `hotel`
 --
 ALTER TABLE `hotel`
-  MODIFY `idHotel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idHotel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `infohotel`
@@ -234,13 +229,13 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `idReserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idReserva` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
