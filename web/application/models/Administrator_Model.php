@@ -471,7 +471,7 @@
 		}
 
 		// blogs models functions starts
-		public function create_blog($post_image)
+		public function create_hotel($post_image)
 		{
 			$slug = url_title($this->input->post('nombre'), "dash", TRUE);
 
@@ -480,6 +480,8 @@
 			    'slug' => $slug,
 			    'descripcion' => $this->input->post('descripcion'),
 			    'image' => $post_image,
+				'latitud' => $this->input->post('latitud'),
+				'longitud' => $this->input->post('longitud'),
 			    );
 			return $this->db->insert('hotel', $data);
 		}
@@ -501,7 +503,7 @@
 		}
 
 	
-		public function update_blog_data($post_image){
+		public function update_hotel_data($post_image){
 			$slug = url_title($this->input->post('nombre'), "dash", TRUE);
 			$data = array(
 				'nombre' => $this->input->post('nombre'), 
@@ -512,32 +514,6 @@
 			$this->db->where('idHotel', $this->input->post('id'));
 			return $this->db->update('hotel', $data);
 		}
-
-		public function list_blog_comments()
-		{
-			$this->db->select('comments.username, comments.email, comments.comment, comments.id as commentId, comments.created_at createdAt, comments.status as commentStatus, posts.title as blogTitle');
-			$this->db->from('comments');
-			$this->db->join('posts', 'posts.id = comments.post_id');
-			$this->db->where('comments.comment_type', 'blog');
-
-				$query=$this->db->get();
-				return $data=$query->result_array();
-		}
-
-		public function view_blog_comments($id = FALSE)
-		{
-
-			if($id === FALSE){
-				$query = $this->db->get('comments');
-				return $query->result_array(); 
-			}
-
-			$query = $this->db->get_where('comments', array('id' => $id));
-			return $query->row_array();
-
-			
-		}
-
 
 
 		//social links

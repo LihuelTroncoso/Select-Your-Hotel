@@ -2,8 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //user routes
-$route['users/register'] = 'users/register';
-$route['users/dashboard'] = 'users/dashboard';
+$route['users/register'] = 'Users/register';
+$route['users/dashboard'] = 'Users/dashboard';
 $route['comments/create/(:any)'] = 'comments/create/$1';
 $route['categories'] = 'category/index';
 $route['categories/create'] = 'category/create';
@@ -20,6 +20,7 @@ $route['myReserves'] = 'reserva/myReserves';
 $route['default_controller'] = 'pages/view';
 $route['hotel/(:any)'] = 'hotel/view/$1';
 $route['hotel'] = 'hotel/view';
+$route['map'] = 'gmap/map';
 
 
 

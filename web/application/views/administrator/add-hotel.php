@@ -36,20 +36,20 @@
                                   <input type="body" class="form-control" name="descripcion" placeholder="...">
                                 </div>
 
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-8">
                                   <label>Upload Image</label><br>
                                   <input type="file" class="form-control" name="userfile" size="20">
+
                                 </div>
 
-                                <h3>Habitaciones</h3>
-                                <div class="form-group col-sm-6">
-                                  <label>Total de Habitaciones</label><br>
-                                  <input type="number" class="form-control" name="habitaciones" size="20">
+                                <div class="form-group col-sm-8">
+                                    <label>latitud</label><br>
+                                    <input type="text" class="form-control" name="latitud" placeholder="...">
                                 </div>
 
-                                <div class="form-group col-sm-6">
-                                  <label>Disponibles</label><br>
-                                  <input type="number" class="form-control" name="habitacionesDisp" size="20">
+                                <div class="form-group col-sm-8">
+                                    <label>Longitud</label><br>
+                                    <input type="text" class="form-control" name="longitud" placeholder="...">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

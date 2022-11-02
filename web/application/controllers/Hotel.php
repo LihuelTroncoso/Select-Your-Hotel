@@ -11,12 +11,4 @@ class Hotel extends CI_Controller
         $this->load->view('pages/view', $data);
         $this->load->view('templates/footer');
     }
-
-    public function maps(){
-        
-    }
-
-    public function myReserves(){
-
-    }
 }

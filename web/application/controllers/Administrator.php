@@ -348,7 +348,7 @@
 					$data =  array('upload_data' => $this->upload->data());
 					$post_image = $_FILES['userfile']['name'];
 				}
-				$this->Administrator_Model->create_blog($post_image);
+				$this->Administrator_Model->create_hotel($post_image);
 
 				//Set Message
 				$this->session->set_flashdata('post_created', 'Your post has been created.');
@@ -426,7 +426,7 @@
 				}
 
 
-				$this->Administrator_Model->update_blog_data($post_image);
+				$this->Administrator_Model->update_hotel_data($post_image);
 
 			    //Set Message
 			    $this->session->set_flashdata('success', 'Blog has been Updated Successfully.');
